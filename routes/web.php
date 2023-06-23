@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,26 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// public routes
 Route::get('/', function () {
-    return view('index');
+    return view('index', [
+        'products' => Product::inRandomOrder()->take(9)->get(),
+    ]);
 })->name('index');
+Route::get('/product', [ProductController::class, 'index'])->name('product-list');
+Route::get('/product/{product}', [ProductController::class, 'detail'])->name('product.detail');
 
-Route::get('/product', function () {
-    return view('product-list');
-})->name('product-list');
-
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['role:user'])->group(function () {
+    Route::controller(CartController::class)->name('cart.')->prefix('cart')->group(function () {
+        Route::post('/add','store')->name('add');
+        Route::get('/','index')->name('index');
+    });
 });
 
 require __DIR__.'/auth.php';

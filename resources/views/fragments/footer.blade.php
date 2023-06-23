@@ -18,8 +18,12 @@
                 <div class="col-md-4">
                     <h4 class="mb-4">About Us</h4>
                     <ul class="list-unstyled">
-                        <li><a href="aboutus.html" class="text-light">About Louvrea</a></li>
-                        <li><a href="aboutus.html" class="text-light">Our Official Reseller</a></li>
+                        <ul class="list-unstyled">
+                            <li><a href="aboutus.html" class="text-light">About Louvrea</a></li>
+                            <li><a href="resellerinfo.html" class="text-light">Our Official Reseller</a></li>
+                            <li><a href="howtoorder.html" class="text-light">Order and Return</a></li>
+                            <li><a href="disclaimer.html" class="text-light">Disclaimer</a></li>
+                        </ul>
 
 
                     </ul>

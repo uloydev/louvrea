@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -10,9 +11,26 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->has('cat') and $request->cat != 'all') {
+            $cat = ProductCategory::find($request->cat);
+            if (!$cat) {
+                abort(404);
+            }
+            $products = Product::where('product_category_id', $request->cat)->get();
+        } else {
+            $cat = null;
+            $products = Product::all();
+        } 
+
+        return view('product-list', ['products' => $products, 'cat' => $cat]);
+
+    }
+
+    public function adminIndex()
+    {
+
     }
 
     /**
@@ -37,6 +55,11 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    }
+
+    public function detail(Product $product)
+    {
+        return view('product-detail', ['product'=> $product]);
     }
 
     /**

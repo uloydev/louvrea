@@ -1,7 +1,7 @@
 @extends('layouts.custom')
 
 @section('content')
-    <h2 class="text-center mt-5">All Product Louvrea</h2>
+    <h2 class="text-center mt-5">{{ $cat != null ? $cat->name : 'All' }} Product Louvrea</h2>
 
     <section id="product-gallery">
         <div class="container">
@@ -13,81 +13,39 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group mb-3">
-                                <label for="category">Kategori:</label>
-                                <select id="category" class="form-control">
-                                    <option value="all">Semua</option>
-                                    <option value="skincare">Skincare</option>
-                                    <option value="makeup">Makeup</option>
-                                    <option value="perfume">Parfum</option>
-                                    <option value="men">Louvrea For Men</option>
-                                </select>
+                                <form action="{{ route('product-list') }}" id="filterForm" method="GET">
+                                    <label for="category">Kategori:</label>
+                                    <select id="category" class="form-control" name="cat">
+                                        <option value="all">Semua</option>
+                                        @foreach (App\Models\ProductCategory::all() as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="text-end mb-3">
-                        <button class="btn btn-primary bg-warning">Terapkan</button>
+                        <button class="btn btn-primary bg-warning" type="submit" form="filterForm">Terapkan</button>
                     </div>
-
-
-
                     <div class="product-gallery">
-                        <div class="product-card">
-                            <a href="produk.html">
-                                <img src="img/bbb.jpg" alt="Product 1"></a>
-                            <h4>Product 1</h4>
-                            <p class="product-description text-center">10ml</p>
-                            <p class="price">$19.99</p>
-                            <a href="#" class="btn-buy-now">Add to Cart</a>
-                        </div>
-
-
-                        <div class="product-card">
-                            <a href="produk.html">
-                                <img src="img/bbb.jpg" alt="Product 2"class="img-fluid"></a>
-                            <h4>Product 2</h4>
-                            <p class="product-description text-center">10ml</p>
-                            <p class="price">$29.99</p>
-                            <a href="#" class="btn-buy-now">Add to Cart</a>
-                        </div>
-
-
-                        <div class="product-card">
-                            <a href="produk.html">
-                                <img src="img/bbb.jpg" alt="Product 1"></a>
-                            <h4>Product 1</h4>
-                            <p class="product-description text-center">20ml</p>
-                            <p class="price">$19.99</p>
-                            <a href="#" class="btn-buy-now">Add to Cart</a>
-                        </div>
-
-                        <div class="product-card">
-                            <a href="produk.html">
-                                <img src="img/bbb.jpg" alt="Product 2"></a>
-                            <h4>Product 2</h4>
-                            <p class="product-description text-center">20ml</p>
-                            <p class="price">$29.99</p>
-                            <a href="#" class="btn-buy-now">Add to Cart</a>
-                        </div>
-
-                        <div class="product-card">
-                            <a href="produk.html">
-                                <img src="img/bbb.jpg" alt="Product 2"></a>
-                            <h4>Product 2</h4>
-                            <p class="product-description text-center">20ml</p>
-                            <p class="price">$29.99</p>
-                            <button class="btn-buy-now">Add to Cart</button>
-                        </div>
-
-                        <div class="product-card">
-                            <a href="produk.html">
-                                <img src="img/bbb.jpg" alt="Product 2"></a>
-                            <h4>Product 2</h4>
-                            <p class="product-description text-center">20ml</p>
-                            <p class="price">$29.99</p>
-                            <button class="btn-buy-now">Add to Cart</button>
-                        </div>
+                        @foreach ($products as $prod)
+                            <div class="product-card">
+                                <a href="{{route('product.detail', $prod->id)}}">
+                                    <img src="{{ asset($prod->image) }}" alt="{{ $prod->name }}"></a>
+                                <h4>{{ $prod->name }}</h4>
+                                <p class="product-description text-center">{{ $prod->short_description }}</p>
+                                <p class="price">{{ 'Rp ' . number_format($prod->price, 0, ',', '.') }}</p>
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$prod->id}}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class ="btn-buy-now">Add to Cart</button>
+                                </form>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -39,24 +39,26 @@
             </div>
         </div>
         <div class="row">
-            @for ($i = 0; $i < 6; $i++)
+            @foreach($products as $prod)
                 <div class="col-md-4">
                     <div class="best-seller-card text-center">
-                        <a href="#">
-                            <img src="{{asset("img/bbb.jpg")}}" alt="Product Image" class="img-fluid">
+                        <a href="{{route('product.detail', $prod->id)}}">
+                            <img src="{{asset($prod->image)}}" alt="{{ $prod->name }}" class="img-fluid">
                         </a>
                         <div class="product-details">
-                            <h4 class="product-title text-center">Product 1</h4>
-                            <p class="product-description text-center">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.
+                            <h4 class="product-title text-center">{{ $prod->name }}</h4>
+                            <p class="product-description text-center">{{ $prod->short_description }}
                             </p>
                         </div>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary btn-buy-now text-dark">Add to cart</a>
-                        </div>
+                        <form action="{{ route('cart.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$prod->id}}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class ="btn-buy-now">Add to Cart</button>
+                        </form>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 @endsection

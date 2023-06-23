@@ -18,4 +18,9 @@ class Product extends Model
         'product_category_id',
         'is_carousel'
     ];
+
+    public function productCategory()
+    {
+        return $this->belongsTo(ProductCategory::class);
+    }
 }

@@ -14,19 +14,19 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 0; $i < 6; $i++)
+                @foreach ($items as $item)
                     <tr>
-                        <td>Produk 1</td>
-                        <td>$10</td>
-                        <td>2</td>
-                        <td>$20</td>
+                        <td>{{$item->product->name}}</td>
+                        <td>{{ 'Rp ' . number_format($item->product->price, 0, ',', '.') }}</td>
+                        <td>{{$item->quantity}}</td>
+                        <td>{{ 'Rp ' . number_format($item->product->price * $item->quantity, 0, ',', '.') }}</td>
                     </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
 
         <div class="text-right">
-            <h4>Total: $50</h4>
+            <h4>Total: {{ 'Rp ' . number_format($grandTotal, 0, ',', '.') }}</h4>
             <a href="payment.html" class="btn btn-buy-now">Checkout</a>
         </div>
     </div>

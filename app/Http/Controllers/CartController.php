@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -12,7 +13,18 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
+
+        $grandTotal = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $subtotal = $cartItem->product->price * $cartItem->quantity;
+            $grandTotal += $subtotal;
+        }
+        return view('cart', [
+            'items' => $cartItems,
+            'grandTotal' => $grandTotal
+        ]);
     }
 
     /**
@@ -28,7 +40,16 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_id' => 'required|numeric|min:1',
+            'quantity' =>'required|numeric|min:1',
+        ]);
+        $cart = new Cart;
+        $cart->user_id = Auth::id();
+        $cart->product_id = $request->product_id;
+        $cart->quantity = $request->quantity;
+        $cart->save();
+        return redirect()->route('cart.index');
     }
 
     /**

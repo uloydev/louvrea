@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Ecommerce</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-XX4+o1gjy2A/TTgEF1kLQzft5TNjK8x8qO9yM1h3+5m1sVxu3Aop7sTj3hF9J+Pz" crossorigin="anonymous">
+    <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+    <style>
+        .step-card {
+          border-radius: 10px;
+          padding: 20px;
+          margin-bottom: 20px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+      </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/logo.png" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">Category</a>
+            <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                <a class="dropdown-item" href="allproduct.html">All Product</a>
+                <a class="dropdown-item" href="skincare.html">Skincare</a>
+                <a class="dropdown-item" href="makeup.html">Makeup</a>
+                <a class="dropdown-item" href="perfume.html">Perfume</a>
+                <a class="dropdown-item" href="menproduct.html">Louvrea For Men</a>
+                <a class="dropdown-item" href="bundling.html">Bundling</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#About Us">About Us</a>
+          </li>
+         
+        </ul>
+        <form class="form-inline search-form" action="search.php" method="GET">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">
+              <i class="icofont-cart"style="font-size: 2em;"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h2 class="text-center my-4">Cara Pemesanan</h2>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-shopping-cart fa-3x"></i></h3>
+          <h5 class="text-center">1. Pilih Item dan Tambahkan ke Keranjang</h5>
+          <p>Pilih item yang diinginkan dan klik tombol "Add to Cart" untuk menambahkannya ke keranjang belanja Anda.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-user fa-3x"></i></h3>
+          <h5 class="text-center">2. Login atau Register</h5>
+          <p>Login terlebih dahulu jika Anda sudah memiliki akun atau lakukan registrasi jika belum memiliki akun.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-credit-card fa-3x"></i></h3>
+          <h5 class="text-center">3. Checkout</h5>
+          <p>Setelah selesai memilih item, klik tombol "Checkout" untuk melanjutkan ke proses pembayaran.</p>
+        </div>
+      </div>
+      
+     
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-edit fa-3x"></i></h3>
+          <h5 class="text-center">5. Isi Data dan Langkah Selanjutnya</h5>
+          <p>Isi data yang diperlukan di dalam kolom dan klik tombol "Checkout" untuk melanjutkan.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-ticket-alt fa-3x"></i></h3>
+          <h5 class="text-center">6. Voucher Code/Referral</h5>
+          <p>Jika Anda memiliki kode voucher atau referral, masukkan kode tersebut ke dalam kotak yang disediakan.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-check fa-3x"></i></h3>
+          <h5 class="text-center">7. Selesaikan Pemesanan</h5>
+          <p>Klik tombol "Complete Order" untuk menyelesaikan pemesanan Anda. Anda akan mendapatkan Order ID, total pesanan, dan nomor rekening untuk melakukan pembayaran.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <h3 class="text-center"><i class="fas fa-clipboard-check fa-3x"></i></h3>
+          <h5 class="text-center">8. Konfirmasi Pembayaran</h5>
+          <p>Setelah melakukan pembayaran, silakan konfirmasi melalui link "Confirm Payment" yang tersedia di invoice yang akan dikirim melalui email atau melalui website kami.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+    <div class="step-card">
+    <h2 class="text-center my-4">Cara pengembalian/Return</h2>
+    <p>Jika produk yang dikirimkan oleh tim kami terdapat kesalahan, maka kami akan mengirimkan produk yang dipesan & mengembalikan Shipping Fee terhadap produk yang dikembalikan ke kami seluruhnya.
+    Produk yang dikembalikan harus dalam kondisi tersegel & belum dicoba/dipakai sama sekali. Proses Retur biasanya memakan waktu 3hari kerja.  
+    Claim maksimal diajukan H+1 minggu dari tanggal pengiriman dilakukan</p>
+</div>
+</div>
+  </div>
+ 
+    <section id="About Us">    
+    <footer>
+           <footer class="bg-dark text-light py-5">
+            <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                  <h4 class="mb-4">Alamat</h4>
+                  <li><a href="https://maps.app.goo.gl/351W5X1v4Nkk9551A" class="text-light">Gang Kopo II Rt03/12, Tanah Baru, Kecamatan Beji, Kota Depok, Jawa Barat 16426, Indonesia</a></li>
+                  <p></p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="mb-4">Contact Us</h4>
+                  <p>Email: <span class="text-warning">Louvrea.jabodetabek@gmail.com</span></p>
+                  <p>WhatsApp: <span class="text-warning">+6281310836761</span></p>
+                </div>
+                <div class="col-md-4">
+                  <h4 class="mb-4">About Us</h4>
+                  <ul class="list-unstyled">
+                    <li><a href="aboutus.html" class="text-light">About Louvrea</a></li>
+                    <li><a href="aboutus.html" class="text-light">Our Official Reseller</a></li>
+                    
+    
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h4 class="mb-4">Follow Us</h4>
+                <ul class="list-unstyled text-center">
+                  <li><a href="#" class="text-light"><i class="icofont-instagram"></i></a></li>
+                  <li><a href="#" class="text-light"><i class="icofont-whatsapp"></i></a></li>
+                  <li><a href="#" class="text-light">Shopee</a></li>
+                  <li><a href="#" class="text-light">Tokopedia</a></li>
+                  <li><a href="#" class="text-light">Bukalapak</a></li>
+                </ul>
+              </div>
+            </div>
+              <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                  <p>&copy; 2023 Louvrea. All rights reserved.</p>
+                </div>
+              </div>
+            </div>
+          </footer>
+          
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+          
+  </body>      
+</html>
