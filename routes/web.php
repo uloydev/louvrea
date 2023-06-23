@@ -20,7 +20,7 @@ use App\Models\Product;
 // public routes
 Route::get('/', function () {
     return view('index', [
-        'products' => Product::inRandomOrder()->take(9)->get(),
+        'products' => Product::inRandomOrder()->take(6)->get(),
     ]);
 })->name('index');
 Route::get('/product', [ProductController::class, 'index'])->name('product-list');
