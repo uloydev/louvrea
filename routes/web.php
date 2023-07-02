@@ -23,14 +23,21 @@ Route::get('/', function () {
         'products' => Product::inRandomOrder()->take(6)->get(),
     ]);
 })->name('index');
+Route::view('/about-us', 'about-us')->name('about-us');
+Route::view('/reseller-info', 'reseller-info')->name('reseller-info');
+Route::view('/how-to-order', 'how-to-order')->name('how-to-order');
+Route::view('/disclaimer', 'disclaimer')->name('disclaimer');
 Route::get('/product', [ProductController::class, 'index'])->name('product-list');
 Route::get('/product/{product}', [ProductController::class, 'detail'])->name('product.detail');
 
+// user routes
 Route::middleware(['role:user'])->group(function () {
     Route::controller(CartController::class)->name('cart.')->prefix('cart')->group(function () {
         Route::post('/add','store')->name('add');
         Route::get('/','index')->name('index');
     });
 });
+
+// admin/superadmin routes
 
 require __DIR__.'/auth.php';
