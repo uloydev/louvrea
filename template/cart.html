@@ -77,20 +77,35 @@
         <tr>
           <td>Produk 1</td>
           <td>$10</td>
-          <td>2</td>
+          <td>
+            <button class="btn btn-sm btn-primary bg-dark" onclick="decrement(this)">-</button>
+            <span class="mx-2">2</span>
+            <button class="btn btn-sm btn-primary bg-dark" onclick="increment(this)">+</button>
+          </td>
           <td>$20</td>
+          <td><button class="btn btn-danger" onclick="deleteRow(this)">Delete</button></td>
         </tr>
         <tr>
           <td>Produk 2</td>
           <td>$15</td>
-          <td>1</td>
+          <td>
+            <button class="btn btn-sm btn-primary bg-dark" onclick="decrement(this)">-</button>
+            <span class="mx-2">3</span>
+            <button class="btn btn-sm btn-primary bg-dark" onclick="increment(this)">+</button>
+          </td>
           <td>$15</td>
+          <td><button class="btn btn-danger" onclick="deleteRow(this)">Delete</button></td>
         </tr>
         <tr>
           <td>Produk 3</td>
           <td>$5</td>
-          <td>3</td>
+          <td>
+            <button class="btn btn-sm btn-primary bg-dark" onclick="decrement(this)">-</button>
+            <span class="mx-2">4</span>
+            <button class="btn btn-sm btn-primary bg-dark" onclick="increment(this)">+</button>
+          </td>
           <td>$15</td>
+          <td><button class="btn btn-danger" onclick="deleteRow(this)">Delete</button></td>
         </tr>
       </tbody>
     </table>
@@ -147,5 +162,48 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function increment(button) {
+      var span = button.parentNode.querySelector("span");
+      var quantity = parseInt(span.textContent);
+      span.textContent = quantity + 1;
+      updateTotal(button, quantity + 1);
+    }
+
+    function decrement(button) {
+      var span = button.parentNode.querySelector("span");
+      var quantity = parseInt(span.textContent);
+      if (quantity > 1) {
+        span.textContent = quantity - 1;
+        updateTotal(button, quantity - 1);
+      }
+    }
+
+    function updateTotal(button, quantity) {
+      var row = button.parentNode.parentNode;
+      var price = parseFloat(row.querySelector("td:nth-child(2)").textContent.replace("$", ""));
+      var total = price * quantity;
+      row.querySelector("td:nth-child(4)").textContent = "$" + total.toFixed(2);
+      updateGrandTotal();
+    }
+
+    function deleteRow(button) {
+      var row = button.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+      updateGrandTotal();
+    }
+
+    function updateGrandTotal() {
+      var rows = document.querySelectorAll("tbody tr");
+      var grandTotal = 0;
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var total = parseFloat(row.querySelector("td:nth-child(4)").textContent.replace("$", ""));
+        grandTotal += total;
+      }
+      document.querySelector(".text-right h4").textContent = "Total: $" + grandTotal.toFixed(2);
+    }
+  </script>
+  
 </body>
 </html>
