@@ -62,121 +62,67 @@
       </div>
     </div>
   </nav>
-  <div class="container mt-4">
-    <h3>My Order</h3>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-md-8">Order #1</div>
-          <div class="col-md-4"><button class="btn btn-warning" data-toggle="modal" data-target="#detailModal">Detail</button></div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-md-8">Order #2</div>
-          <div class="col-md-4"><button class="btn btn-warning" data-toggle="modal" data-target="#detailModal">Detail</button></div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-md-8">Order #3</div>
-          <div class="col-md-4"><button class="btn btn-warning" data-toggle="modal" data-target="#detailModal">Detail</button></div>
-        </div>
-      </li>
-      <!-- Tambahkan order lainnya sesuai kebutuhan -->
-    </ul>
-  </div>
+  <h2 class="text-center mt-5">Hasil Pencarian : </h2>
+  
+ 
 
-  <!-- Modal Pop-up -->
-  <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="detailModalLabel">My Order</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- Isi dengan informasi detail order -->
-          <div class="container">
-          <div class="my-4">
-              <h4>Order ID: 123456789</h4>
-              <h4>Nomor Resi: 12354</h4>
-              <p>Order Date: June 10, 2023</p>
-            </div>
-
-            <div class="my-4">
-              <h4>Alamat Pengiriman</h4>
-              <p class="card-text">Shipping Address:<br>789 Oak Street,<br>City, State, ZIP</p>
-          
-        
-            <div class="my-4">
-              <h4>Order detail</h4>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Harga</th>
-                    <th>Quantity</th>
-                    <th>SubTotal Harga</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>T-Shirt</td>
-                    <td>$50</td>
-                    <td>2</td>
-                    <td>$50</td>
-                  </tr>
-                  <tr>
-                    <td>Shoes</td>
-                    <td>$50</td>
-                    <td>1</td>
-                    <td>$50</td>
-                  </tr>
-                  <tr>
-                    <td>Smartphone</td>
-                    <td>$50</td>
-                    <td>1</td>
-                    <td>$50</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <h4>Rincian Harga</h4>
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Subtotal</td>
-                  <td>$XX.XX</td>
-                </tr>
-                <tr>
-                  <td>Ongkos Kirim</td>
-                  <td>$XX.XX</td>
-                </tr>
-                <tr>
-                  <td>Diskon Voucher</td>
-                  <td>$XX.XX</td>
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td>$XX.XX</td>
-                </tr>
-              </tbody>
-            </table>
-           
-            <div class="my-4">
-              <h4>Status : Belum Bayar</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4"><button class="btn btn-warning" data-toggle="modal" data-target="#detailModal">Bayar Sekarang</button></div>
+  <div class="product-gallery">
+    <div class="product-card">
+    <a href="produk.html">
+    <img src="img/bbb.jpg" alt="Product 1"></a>
+      <h4>Product 1</h4>
+      <p class="product-description text-center">10ml</p>
+      <p class="price">$19.99</p>
+      <a href="#" class="btn-buy-now">Add to Cart</a>
     </div>
-  </div>
-</div>
-</div>
+ 
+   
+  <div class="product-card">
+    <a href="produk.html">
+      <img src="img/bbb.jpg" alt="Product 2"class="img-fluid"></a>
+      <h4>Product 2</h4>
+      <p class="product-description text-center">10ml</p>
+      <p class="price">$29.99</p>      
+      <a href="#" class="btn-buy-now">Add to Cart</a>
+    </div>
+   
+  
+      <div class="product-card">
+        <a href="produk.html">
+        <img src="img/bbb.jpg" alt="Product 1"></a>
+        <h4>Product 1</h4>
+        <p class="product-description text-center">20ml</p>
+        <p class="price">$19.99</p>
+        <a href="#" class="btn-buy-now">Add to Cart</a>
+      </div>
+      
+    <div class="product-card">
+        <a href="produk.html">
+        <img src="img/bbb.jpg" alt="Product 2"></a>
+        <h4>Product 2</h4>
+        <p class="product-description text-center">20ml</p>
+        <p class="price">$29.99</p>
+        <a href="#" class="btn-buy-now">Add to Cart</a>
+        </div>
+    
+    <div class="product-card">
+        <a href="produk.html">
+      <img src="img/bbb.jpg" alt="Product 2"></a>
+      <h4>Product 2</h4>
+      <p class="product-description text-center">20ml</p>
+      <p class="price">$29.99</p>
+      <button class="btn-buy-now">Add to Cart</button>
+      </div>
+      
+      <div class="product-card">
+        <a href="produk.html">
+        <img src="img/bbb.jpg" alt="Product 2"></a>
+        <h4>Product 2</h4>
+        <p class="product-description text-center">20ml</p>
+        <p class="price">$29.99</p>        
+        <button class="btn-buy-now">Add to Cart</button>
+        </div>
+    </section>
 
     <section id="About Us">    
     <footer>

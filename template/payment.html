@@ -103,6 +103,8 @@
         <h2>Checkout</h2>
         <hr>
 
+
+
         <h4>Informasi Produk</h4>
         <div class="card mb-3">
           <div class="row no-gutters">
@@ -114,90 +116,167 @@
                 <h5 class="card-title">Nama Produk</h5>
                 <p class="card-text">Deskripsi produk</p>
                 <p class="card-text">Harga: $XX.XX</p>
+                <p class="card-text">Jumlah: 4</p>
+                <p class="card-text">SubTotal Produk: $XX.XX</p>
               </div>
             </div>
           </div>
         </div>
 
-        <h4>Rincian Harga</h4>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>Subtotal</td>
-              <td>$XX.XX</td>
-            </tr>
-            <tr>
-              <td>Ongkos Kirim</td>
-              <td>$XX.XX</td>
-            </tr>
-            <tr>
-              <td>Total</td>
-              <td>$XX.XX</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h4>Metode Pembayaran</h4>
-        <div class="form-group">
-          <label for="paymentMethod">Pilih metode pembayaran:</label>
-          <select class="form-control" id="paymentMethod">
-            <option>Metode Pembayaran 1</option>
-            <option>Metode Pembayaran 2</option>
-            <option>Metode Pembayaran 3</option>
-          </select>
+        <h4>Redeem Voucher</h4>
+        <div class="input-group mb-3">
+          <label for="voucherCode" class="input-group-text">Kode Voucher:</label>
+          <input type="text" class="form-control" id="voucherCode" name="voucherCode" placeholder="Masukkan kode voucher">
+          <div class="input-group-append">
+            <button class="btn btn-secondary ml-2" type="button">Apply</button>
+          </div>
         </div>
+        
+        
 
-        <h4>Layanan Pengiriman</h4>
-        <div class="form-group">
-          <label for="shippingMethod">Pilih layanan pengiriman:</label>
-          <select class="form-control" id="shippingMethod">
-            <option>Layanan Pengiriman 1</option>
-            <option>Layanan Pengiriman 2</option>
-            <option>Layanan Pengiriman 3</option>
-          </select>
-        </div>
+ <!-- Tambahkan tombol untuk memicu modal -->
+ <h4>Alamat Pengiriman</h4>
+ <p>Masukkan alamat pengiriman</p>
+ <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#addressModal" class="mb-4">Ubah Alamat</a>
+ <div class="mb-4"></div>
 
-        <a href="#" class="btn btn-buy-now">Checkout</a>
+ <!-- Tambahkan modal untuk formulir alamat -->
+ <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="addressModalLabel">Masukkan Alamat Pengiriman</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <form>
+           <div class="form-group">
+             <label for="fullName">Nama Lengkap:</label>
+             <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Masukkan nama lengkap">
+           </div>
+ 
+           <div class="form-group">
+             <label for="phoneNumber">Nomor Telepon:</label>
+             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+               placeholder="Masukkan nomor telepon">
+           </div>
+ 
+           <div class="form-group">
+             <label for="fullAddress">Alamat Lengkap:</label>
+             <input type="text" class="form-control" id="fullAddress" name="fullAddress"
+               placeholder="Masukkan alamat lengkap">
+           </div>
+ 
+           <div class="form-group">
+             <label for="otherDetails">Detail Lainnya:</label>
+             <textarea class="form-control" id="otherDetails" name="otherDetails"
+               placeholder="Masukkan detail lainnya"></textarea>
+           </div>
+ 
+           <button type="submit" class="btn btn-secondary">Simpan</button>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <h4>Metode Pembayaran</h4>
+ <div class="form-group">
+   <label for="paymentMethod">Pilih metode pembayaran:</label>
+   <select class="form-control" id="paymentMethod">
+     <option>Metode Pembayaran 1</option>
+     <option>Metode Pembayaran 2</option>
+     <option>Metode Pembayaran 3</option>
+   </select>
+ </div>
+
+ <h4>Layanan Pengiriman</h4>
+ <div class="form-group">
+   <label for="shippingMethod">Pilih layanan pengiriman:</label>
+   <select class="form-control" id="shippingMethod">
+     <option>Layanan Pengiriman 1</option>
+    </select>
+ </div>
+
+
+ <h4>Rincian Harga</h4>
+ <table class="table">
+   <tbody>
+     <tr>
+       <td>Total</td>
+       <td>$XX.XX</td>
+     </tr>
+   </tbody>
+ </table>
+ 
+ <button class="btn btn-link mb-3" type="button" data-toggle="collapse" data-target="#subtotalCollapse" aria-expanded="false" aria-controls="subtotalCollapse">
+   Detail Harga
+ </button>
+ <div class="collapse" id="subtotalCollapse">
+   <table class="table">
+     <tbody>
+       <tr>
+         <td>Subtotal</td>
+         <td>$XX.XX</td>
+       </tr>
+       <tr>
+         <td>Ongkos Kirim</td>
+         <td>$XX.XX</td>
+       </tr>
+       <tr>
+         <td>Diskon Voucher</td>
+         <td>$XX.XX</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+ 
+
+<div class="text-left">
+<a href="#" class="btn btn-buy-now">Complete Order</a>
+</div>
       </div>
     </div>
   </div>
 
   <section id="About Us"> 
-  <footer>
-    <footer class="bg-dark text-light py-5">
+    <footer class="bg-dark text-light py-5 mt-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <h4 class="mb-4">Alamat</h4>
-            <li><a href="https://maps.app.goo.gl/351W5X1v4Nkk9551A" class="text-light">Gang Kopo II Rt03/12, Tanah Baru, Kecamatan Beji, Kota Depok, Jawa Barat 16426, Indonesia</a></li>
-            <p></p>
+            <ul class="list-unstyled">
+              <li><a href="https://maps.app.goo.gl/351W5X1v4Nkk9551A" class="text-light">Gang Kopo II Rt03/12, Tanah Baru, Kecamatan Beji, Kota Depok, Jawa Barat 16426, Indonesia</a></li>
+            </ul>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <h4 class="mb-4">Contact Us</h4>
-            <p>Email: <span class="text-warning">Louvrea.jabodetabek@gmail.com</span></p>
-            <p>WhatsApp: <span class="text-warning">+6281310836761</span></p>
+            <ul class="list-unstyled">
+              <li>Email: <span class="text-warning">Louvrea.jabodetabek@gmail.com</span></li>
+              <li>WhatsApp: <span class="text-warning">+6281310836761</span></li>
+            </ul>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <h4 class="mb-4">About Us</h4>
             <ul class="list-unstyled">
               <li><a href="aboutus.html" class="text-light">About Louvrea</a></li>
               <li><a href="aboutus.html" class="text-light">Our Official Reseller</a></li>
-              
-
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h4 class="mb-4">Follow Us</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-light"><i class="icofont-instagram"></i></a></li>
+              <li><a href="#" class="text-light"><i class="icofont-whatsapp"></i></a></li>
+              <li><a href="#" class="text-light">Shopee</a></li>
+              <li><a href="#" class="text-light">Tokopedia</a></li>
+              <li><a href="#" class="text-light">Bukalapak</a></li>
             </ul>
           </div>
         </div>
-        <div class="col-md-4">
-          <h4 class="mb-4">Follow Us</h4>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-light"><i class="icofont-instagram"></i></a></li>
-            <li><a href="#" class="text-light"><i class="icofont-whatsapp"></i></a></li>
-            <li><a href="#" class="text-light">Shopee</a></li>
-            <li><a href="#" class="text-light">Tokopedia</a></li>
-            <li><a href="#" class="text-light">Bukalapak</a></li>
-          </ul>
-        </div>
-      </div>
         <div class="row mt-3">
           <div class="col-md-12 text-center">
             <p>&copy; 2023 Louvrea. All rights reserved.</p>
@@ -205,6 +284,7 @@
         </div>
       </div>
     </footer>
+    
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
      
