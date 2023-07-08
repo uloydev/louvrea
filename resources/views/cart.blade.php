@@ -16,10 +16,33 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr>
-                        <td>{{$item->product->name}}</td>
+                        <td>{{ $item->product->name }}</td>
                         <td>{{ 'Rp ' . number_format($item->product->price, 0, ',', '.') }}</td>
-                        <td>{{$item->quantity}}</td>
+                        <td>
+                            <form action="{{ route('cart.modify', $item->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <input type="number" name="value" hidden value="1">
+                                <button class="btn btn-sm btn-primary bg-dark" type="submit">Delete</button>
+                            </form>
+                            <span class="mx-2">
+                                {{ $item->quantity }}
+                            </span>
+                            <form action="{{ route('cart.modify', $item->id) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <input type="number" name="value" hidden value="-1">
+                                <button class="btn btn-sm btn-primary bg-dark" type="submit">Delete</button>
+                            </form>
+                        </td>
                         <td>{{ 'Rp ' . number_format($item->product->price * $item->quantity, 0, ',', '.') }}</td>
+                        <td>
+                            <form action="{{ route('cart.delete', $item->id) }}" method="DELETE">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

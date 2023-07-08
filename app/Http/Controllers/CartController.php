@@ -73,14 +73,25 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        $request->validate([
+            'value' => 'required|numeric'
+        ]);
+        $value = $request->value;
+        if ($cart->quantity == 1 and $value == -1) {
+            $cart->delete();
+        } else {
+            $cart->quantity += $value;
+            $cart->save();
+        }
+        return redirect()->route('cart.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function delete(Cart $cart)
     {
-        //
+        $cart->delete();
+        return redirect()->route('cart.index');
     }
 }

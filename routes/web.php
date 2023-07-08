@@ -34,9 +34,13 @@ Route::get('/product/{product}', [ProductController::class, 'detail'])->name('pr
 Route::middleware(['role:user'])->group(function () {
     Route::controller(CartController::class)->name('cart.')->prefix('cart')->group(function () {
         Route::post('/add','store')->name('add');
+        Route::delete('/{cart}','delete')->name('delete');
+        Route::post('/{cart}','update')->name('modify');
         Route::get('/','index')->name('index');
     });
 });
+
+Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 
 // admin/superadmin routes
 
