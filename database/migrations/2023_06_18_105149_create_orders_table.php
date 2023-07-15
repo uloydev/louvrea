@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('voucher_id')->nullable();
             $table->string('awb_number', 50)->nullable();
             $table->string('address', 255);
+            $table->string('address_detail', 255)->nullable();
             $table->string('phone', 20);
             $table->string('full_name', 100);
             $table->enum('status', ['PENDING', 'PROCESSING', 'SHIPPING', 'FINISHED'])->default('PENDING');

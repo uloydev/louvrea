@@ -15,6 +15,7 @@ class Order extends Model
         'order_price',
         'shipping_price',
         'address',
+        'address_detail',
         'phone',
         'shipping_method',
         'discount',

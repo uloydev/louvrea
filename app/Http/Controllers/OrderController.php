@@ -30,10 +30,8 @@ class OrderController extends Controller
 
     public function myOrder() 
     {
-        $orders = Order::where('user_id', Auth::id())->get();
-
-        compact(['orders']);
-        return view('my-order');
+        $orders = Order::where('user_id', Auth::id())->with('orderItems')->get();
+        return view('my-order', ['orders' => $orders]);
     }
 
     /**
@@ -72,6 +70,7 @@ class OrderController extends Controller
             'order_price' => $subTotal,
             'shipping_price' => $shippingPrice,
             'address' => $request->fullAddress,
+            'address_detail' => $request->addressDetail,
             'phone' => $request->phoneNumber,
             'shipping_method' => $request->shippingMethod,
             'status' => OrderStatus::PENDING,

@@ -107,7 +107,7 @@ class CartController extends Controller
             $itemPrice = $cartItem->product->price * $cartItem->quantity;
             $subTotal += $itemPrice;
         }
-        return view('payment', [
+        return view('checkout', [
             'shipping_methods' => [
                 'KURIR TOKO'
             ],
