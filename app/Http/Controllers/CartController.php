@@ -94,4 +94,27 @@ class CartController extends Controller
         $cart->delete();
         return redirect()->route('cart.index');
     }
+
+    public function checkoutSummary(Request $request) {
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
+        if (count($cartItems) == 0) {
+            return redirect()->route('cart.index');
+        }
+        $subTotal = 0;
+        $shippingPrice = 10000;
+
+        foreach ($cartItems as $cartItem) {
+            $itemPrice = $cartItem->product->price * $cartItem->quantity;
+            $subTotal += $itemPrice;
+        }
+        return view('payment', [
+            'shipping_methods' => [
+                'KURIR TOKO'
+            ],
+            'shipping' => $shippingPrice,
+            'items' => $cartItems,
+            'subTotal' => $subTotal,
+            'grandTotal' => $subTotal + $shippingPrice,
+        ]);
+    }
 }

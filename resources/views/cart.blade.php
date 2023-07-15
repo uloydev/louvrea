@@ -19,25 +19,25 @@
                         <td>{{ $item->product->name }}</td>
                         <td>{{ 'Rp ' . number_format($item->product->price, 0, ',', '.') }}</td>
                         <td>
-                            <form action="{{ route('cart.modify', $item->id) }}" method="POST">
+                            <form action="{{ route('cart.modify', $item->id) }}" method="POST" id="formIncrement">
                                 @csrf
                                 @method('POST')
                                 <input type="number" name="value" hidden value="1">
-                                <button class="btn btn-sm btn-primary bg-dark" type="submit">Delete</button>
                             </form>
-                            <span class="mx-2">
-                                {{ $item->quantity }}
-                            </span>
-                            <form action="{{ route('cart.modify', $item->id) }}" method="POST">
+                            <form action="{{ route('cart.modify', $item->id) }}" method="POST" id="formDecrement">
                                 @csrf
                                 @method('POST')
                                 <input type="number" name="value" hidden value="-1">
-                                <button class="btn btn-sm btn-primary bg-dark" type="submit">Delete</button>
                             </form>
+                            <button class="btn btn-sm btn-primary bg-dark" type="submit" form="formIncrement">+</button>
+                            <span class="mx-2">
+                                {{ $item->quantity }}
+                            </span>
+                            <button class="btn btn-sm btn-primary bg-dark" type="submit" form="formDecrement">-</button>
                         </td>
                         <td>{{ 'Rp ' . number_format($item->product->price * $item->quantity, 0, ',', '.') }}</td>
                         <td>
-                            <form action="{{ route('cart.delete', $item->id) }}" method="DELETE">
+                            <form action="{{ route('cart.delete', $item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Delete</button>
@@ -50,7 +50,7 @@
 
         <div class="text-right">
             <h4>Total: {{ 'Rp ' . number_format($grandTotal, 0, ',', '.') }}</h4>
-            <a href="payment.html" class="btn btn-buy-now">Checkout</a>
+            <a href="{{ route('cart.checkout-summary') }}" class="btn btn-buy-now">Checkout</a>
         </div>
     </div>
 @endsection

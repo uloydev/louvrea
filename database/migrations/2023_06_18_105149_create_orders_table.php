@@ -17,8 +17,14 @@ return new class extends Migration
             $table->unsignedInteger('grand_total');
             $table->unsignedInteger('order_price');
             $table->unsignedInteger('shipping_price');
+            $table->enum('shipping_method', ['KURIR TOKO'])->default('KURIR TOKO');
+            $table->unsignedInteger('discount')->default(0);
+            $table->unsignedInteger('voucher_id')->nullable();
+            $table->string('awb_number', 50)->nullable();
             $table->string('address', 255);
             $table->string('phone', 20);
+            $table->string('full_name', 100);
+            $table->enum('status', ['PENDING', 'PROCESSING', 'SHIPPING', 'FINISHED'])->default('PENDING');
             $table->timestamps();
         });
     }

@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Voucher;
+use App\Models\Cart;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,11 +32,37 @@ class DatabaseSeeder extends Seeder
         ]);
         $categories = ProductCategory::factory(5)->create();
 
-        foreach($categories as $cat) {
+        foreach ($categories as $cat) {
             $products = Product::factory(12)->create([
                 'product_category_id' => $cat->id
             ]);
             $cat->products()->saveMany($products);
         }
+
+        Voucher::insert([
+            [
+                'code' => 'wkwk',
+                'quota' => 5,
+                'discount' => 10000,
+            ],
+            [
+                'code' => 'coba',
+                'quota' => 5,
+                'discount' => 5000
+            ]
+        ]);
+
+        Cart::insert([
+            [
+                'user_id' => 1,
+                'product_id' => 1,
+                'quantity' => 1
+            ],
+            [
+                'user_id' => 1,
+                'product_id' => 2,
+                'quantity' => 2
+            ],
+        ]);
     }
 }

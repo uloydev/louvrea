@@ -16,5 +16,29 @@ class Order extends Model
         'shipping_price',
         'address',
         'phone',
+        'shipping_method',
+        'discount',
+        'voucher_id',
+        'awb_number',
+        'full_name',
+        'status',
     ];
+
+    public function orderItems() 
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+}
+
+class OrderStatus
+{
+    const PENDING = 'PENDING';
+    const PROCESSING = 'PROCESSING';
+    const SHIPPING = 'SHIPPING';
+    const FINISHED = 'FINISHED';
+}
+
+class ShippingMethod
+{
+    const KURIR_TOKO = 'KURIR TOKO';
 }
