@@ -69,7 +69,6 @@ class AdminController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
-            'email_verified_at' => now(),
         ]);
 
         return redirect()->route($this->indexRoute);
