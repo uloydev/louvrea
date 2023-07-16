@@ -10,43 +10,6 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            @if (auth()->user()->role == 'superuser')
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Add User</h3>
-                            </div>
-                            <div class="card-body">
-                                <form action="{{ route('dashboard.user.create') }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="userName">Name</label>
-                                        <input type="text" class="form-control" id="userName" placeholder="Enter name"
-                                            name="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userEmail">Email</label>
-                                        <input type="email" class="form-control" id="userEmail" placeholder="Enter email"
-                                            name="email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userPassword">Password</label>
-                                        <input type="password" class="form-control" id="userPassword"
-                                            placeholder="Enter password" name="password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userPasswordVerify">Confirm Password</label>
-                                        <input type="password" class="form-control" id="userPasswordVerify"
-                                            placeholder="Enter password confirmation" name="password_confirmation">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Add User</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
             <div class="row mt-4">
                 <div class="col-md-12">
                     <div class="card">

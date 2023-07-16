@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Voucher;
 use App\Models\Cart;
+use App\Models\Reseller;
 
 class DatabaseSeeder extends Seeder
 {
@@ -62,6 +63,21 @@ class DatabaseSeeder extends Seeder
                 'user_id' => 1,
                 'product_id' => 2,
                 'quantity' => 2
+            ],
+        ]);
+
+        Reseller::insert([
+            [
+                'area' => 'Jakarta',
+                'phone' => '0812-3456-7890',
+            ],
+            [
+                'area' => 'Bandung',
+                'phone' => '0856-7890-1234',
+            ],
+            [
+                'area' => 'Surabaya',
+                'phone' => '0877-1234-5678',
             ],
         ]);
     }

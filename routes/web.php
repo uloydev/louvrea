@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
@@ -59,6 +60,7 @@ Route::middleware(['role:admin|superadmin'])->prefix('dashboard')->name('dashboa
     Route::get('/product', [ProductController::class, 'adminIndex'])->name('product');
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/reseller', [ResellerController::class, 'index'])->name('reseller');
 });
 
 // superadmin only routes
@@ -84,6 +86,12 @@ Route::middleware(['role:superadmin'])->prefix('dashboard')->name('dashboard.')-
     Route::controller(UserController::class)->name('user.')->prefix('user')->group(function () {
         Route::put('/{user}', 'update')->name('update');
         Route::delete('/{user}', 'destroy')->name('delete');
+    });
+
+    Route::controller(ResellerController::class)->name('reseller.')->prefix('reseller')->group(function () {
+        Route::post('/', 'store')->name('create');
+        Route::put('/{reseller}', 'update')->name('update');
+        Route::delete('/{reseller}', 'destroy')->name('delete');
     });
 });
 
