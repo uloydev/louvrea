@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -46,6 +47,14 @@ Route::middleware(['role:user'])->group(function () {
         Route::get('/','myOrder')->name('my-order');
     });
 });
+
+// admin or superadmin routes
+Route::middleware(['role:admin|superadmin'])->prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+});
+
+// superadmin only routes
+Route::middleware(['role:superadmin'])->group(function () {});
 
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 
