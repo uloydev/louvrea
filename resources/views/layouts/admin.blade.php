@@ -45,6 +45,8 @@
                 </div>
             </section>
 
+            @include('fragments.validation-error')
+
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
