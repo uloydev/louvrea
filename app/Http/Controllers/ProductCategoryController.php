@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
 {
+
+    private $indexRoute = 'dashboard.product-category';
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.product-category', ['categories' => ProductCategory::all()]);
     }
 
     /**
@@ -28,7 +30,13 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        ProductCategory::create(['name' => $request->name]);
+
+        return redirect()->route($this->indexRoute);
     }
 
     /**
@@ -52,7 +60,14 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, ProductCategory $productCategory)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $productCategory->name = $request->name;
+        $productCategory->save();
+
+        return redirect()->route($this->indexRoute);
     }
 
     /**
@@ -60,6 +75,7 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        $productCategory->delete();
+        return redirect()->route($this->indexRoute);
     }
 }

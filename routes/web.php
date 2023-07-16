@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Models\ProductCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,10 +55,34 @@ Route::middleware(['role:user'])->group(function () {
 // admin or superadmin routes
 Route::middleware(['role:admin|superadmin'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('product-category');
 });
 
 // superadmin only routes
-Route::middleware(['role:superadmin'])->group(function () {});
+Route::middleware(['role:superadmin'])->prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::controller(ProductCategoryController::class)->name('product-category.')->prefix('product-category')->group(function () {
+        Route::post('/', 'store')->name('create');
+        Route::put('/{productCategory}', 'update')->name('update');
+        Route::delete('/{productCategory}', 'destroy')->name('delete');
+    });
+
+    Route::controller(ProductController::class)->name('product.')->prefix('product')->group(function () {
+        Route::post('/', 'store')->name('create');
+        Route::put('/{product}', 'update')->name('update');
+        Route::delete('/{product}', 'destroy')->name('delete');
+    });
+
+    Route::controller(AdminController::class)->name('admin.')->prefix('admin')->group(function () {
+        Route::post('/', 'store')->name('create');
+        Route::put('/{admin}', 'update')->name('update');
+        Route::delete('/{admin}', 'destroy')->name('delete');
+    });
+
+    Route::controller(UserController::class)->name('user.')->prefix('user')->group(function () {
+        Route::put('/{user}', 'update')->name('update');
+        Route::delete('/{user}', 'destroy')->name('delete');
+    });
+});
 
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 
