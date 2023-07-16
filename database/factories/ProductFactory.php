@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(3),
-            'short_description' => ($this->faker->randomDigitNotZero() * 10) . 'ml',
+            'size' => ($this->faker->randomDigitNotZero() * 10) . 'ml',
             'description' => $this->faker->paragraph(7),
             'price' => $this->faker->randomDigitNotZero() * 10000,
             'stock' => $this->faker->randomDigitNotZero() * 2,

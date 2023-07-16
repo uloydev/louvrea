@@ -56,6 +56,9 @@ Route::middleware(['role:user'])->group(function () {
 Route::middleware(['role:admin|superadmin'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('product-category');
+    Route::get('/product', [ProductController::class, 'adminIndex'])->name('product');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::get('/user', [UserController::class, 'index'])->name('user');
 });
 
 // superadmin only routes

@@ -34,9 +34,9 @@
                         @foreach ($products as $prod)
                             <div class="product-card">
                                 <a href="{{route('product.detail', $prod->id)}}">
-                                    <img src="{{ asset($prod->image) }}" alt="{{ $prod->name }}"></a>
+                                    <img src="{{ asset('storage/'.$prod->image) }}" alt="{{ $prod->name }}"></a>
                                 <h4>{{ $prod->name }}</h4>
-                                <p class="product-description text-center">{{ $prod->short_description }}</p>
+                                <p class="product-description text-center">{{ $prod->size }}</p>
                                 <p class="price">{{ 'Rp ' . number_format($prod->price, 0, ',', '.') }}</p>
                                 <form action="{{ route('cart.add') }}" method="POST">
                                     @csrf

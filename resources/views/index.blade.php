@@ -43,11 +43,11 @@
                 <div class="col-md-4">
                     <div class="best-seller-card text-center">
                         <a href="{{route('product.detail', $prod->id)}}">
-                            <img src="{{asset($prod->image)}}" alt="{{ $prod->name }}" class="img-fluid">
+                            <img src="{{asset('storage/'.$prod->image)}}" alt="{{ $prod->name }}" class="img-fluid">
                         </a>
                         <div class="product-details">
                             <h4 class="product-title text-center">{{ $prod->name }}</h4>
-                            <p class="product-description text-center">{{ $prod->short_description }}
+                            <p class="product-description text-center">{{ $prod->size }}
                             </p>
                         </div>
                         <form action="{{ route('cart.add') }}" method="POST">

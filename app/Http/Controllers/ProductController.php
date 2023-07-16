@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    private $indexRoute = 'dashboard.product';
     /**
      * Display a listing of the resource.
      */
@@ -22,15 +24,17 @@ class ProductController extends Controller
         } else {
             $cat = null;
             $products = Product::all();
-        } 
+        }
 
         return view('product-list', ['products' => $products, 'cat' => $cat]);
-
     }
 
     public function adminIndex()
     {
-
+        return view('admin.product', [
+            'products' => Product::all(),
+            'categories' => ProductCategory::all(),
+        ]);
     }
 
     /**
@@ -46,7 +50,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateForm($request);
+
+        $path = $request->file('image')->store('product-image', 'public');
+
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $path,
+            'size' => $request->size,
+            'stock' => $request->stock,
+            'product_category_id' => $request->category,
+        ]);
+
+        return redirect()->route($this->indexRoute);
     }
 
     /**
@@ -59,7 +77,7 @@ class ProductController extends Controller
 
     public function detail(Product $product)
     {
-        return view('product-detail', ['product'=> $product]);
+        return view('product-detail', ['product' => $product]);
     }
 
     /**
@@ -75,7 +93,21 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $this->validateForm($request);
+
+        $path = $request->file('image')->store('product-image', 'public');
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->image = $path;
+        $product->size = $request->size;
+        $product->stock = $request->stock;
+        $product->product_category_id = $request->category;
+
+        $product->save();
+
+        return redirect()->route($this->indexRoute);
     }
 
     /**
@@ -83,6 +115,21 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route($this->indexRoute);
+    }
+
+    private function validateForm(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'image' => 'required|image',
+            'size' => 'required|string',
+            'stock' => 'required|numeric',
+            'category' => 'required|numeric',
+        ]);
     }
 }

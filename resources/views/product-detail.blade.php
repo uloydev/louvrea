@@ -4,13 +4,15 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-6">
-                <img src="{{ asset($product->image) }}" class="img-fluid" alt="{{ $product->name }}">
+                <img src="{{ asset('storage/'.$product->image) }}" class="img-fluid" alt="{{ $product->name }}">
             </div>
             <div class="col-lg-6">
                 <h2>{{ $product->name }}</h2>
                 <p class="text-muted">Harga: {{ 'Rp ' . number_format($product->price, 0, ',', '.') }}</p>
                 <p>Deskripsi Produk:</p>
                 <p>{{ $product->description }}</p>
+                <p>Size:</p>
+                <p>{{ $product->size }}</p>
                 <form action="{{ route('cart.add') }}" method="POST">
                     @csrf
                     <input type="hidden" name="product_id" value="{{$product->id}}">
