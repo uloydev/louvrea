@@ -1,6 +1,7 @@
 @extends('layouts.custom')
 
 @section('content')
+    <div id="snap-container" class="container"></div>
     <div class="container my-4">
         <h3>My Order</h3>
         <ul class="list-group">
@@ -28,7 +29,7 @@
                                 <div class="container">
                                     <div class="my-4">
                                         <h4>Order ID: {{ $order->id }}</h4>
-                                        @if($order->awb_number)
+                                        @if ($order->awb_number)
                                             <h4>Nomor Resi: {{ $order->awb_number }}</h4>
                                         @endif
                                         <p>Order Date: {{ $order->created_at->format('d F Y H:i:s') }}</p>
@@ -88,10 +89,25 @@
                                         <div class="my-4">
                                             <h4>Status : {{ $order->status }}</h4>
                                         </div>
+                                        <div class="my-4">
+                                            <h4>
+                                                Payment Status :
+                                                @if ($order->payment_status == '1')
+                                                    Belum Bayar
+                                                @elseif($order->payment_status == '2')
+                                                    Pembayaran Sukses
+                                                @elseif($order->payment_status == '3')
+                                                    Pembayaran Kadaluarsa
+                                                @elseif($order->payment_status == '4')
+                                                    Pembayaran Gagal
+                                                @endif
+                                            </h4>
+                                        </div>
                                     </div>
                                 </div>
-                                @if ($order->status == 'PENDING')
-                                    <button class="btn btn-warning btn-block">Bayar Sekarang</button>
+                                @if ($order->status == 'PENDING' and $order->payment_status != '2')
+                                    <button class="btn btn-warning btn-block" onclick="pay('{{ $order->payment_url }}')">Bayar
+                                        Sekarang</button>
                                 @endif
                             </div>
                         </div>
@@ -104,3 +120,11 @@
 
     <!-- Modal Pop-up -->
 @endsection
+
+@push('script')
+    <script>
+        const pay = (payUrl) => {
+            window.open(payUrl, '_blank');
+        };
+    </script>
+@endpush

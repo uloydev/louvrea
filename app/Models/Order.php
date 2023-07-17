@@ -23,6 +23,9 @@ class Order extends Model
         'awb_number',
         'full_name',
         'status',
+        'payment_status',
+        'snap_token',
+        'payment_url'
     ];
 
     public function orderItems() 

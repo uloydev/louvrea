@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->string('full_name', 100);
             $table->enum('status', ['PENDING', 'PROCESSING', 'SHIPPING', 'FINISHED'])->default('PENDING');
+            $table->enum('payment_status', ['1', '2', '3', '4'])->default('1')->comment('1=menunggu pembayaran, 2=sudah dibayar, 3=kadaluarsa, 4=batal');
+            $table->string('snap_token', 36)->nullable();
+            $table->string('payment_url')->nullable();
             $table->timestamps();
         });
     }

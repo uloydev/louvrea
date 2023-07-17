@@ -6,9 +6,9 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
-use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Midtrans\CreateSnapTokenService;
 
 class OrderController extends Controller
 {
@@ -36,7 +36,7 @@ class OrderController extends Controller
         //
     }
 
-    public function myOrder() 
+    public function myOrder()
     {
         $orders = Order::where('user_id', Auth::id())->with('orderItems')->get();
         return view('my-order', ['orders' => $orders]);
@@ -72,7 +72,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => $userId,
-            'grand_total' => $subTotal+$shippingPrice,
+            'grand_total' => $subTotal + $shippingPrice,
             'order_price' => $subTotal,
             'shipping_price' => $shippingPrice,
             'address' => $request->fullAddress,
@@ -80,7 +80,8 @@ class OrderController extends Controller
             'phone' => $request->phoneNumber,
             'shipping_method' => $request->shippingMethod,
             'status' => OrderStatus::PENDING,
-            'full_name' => $request->fullName
+            'full_name' => $request->fullName,
+            'payment_status' => '1',
         ]);
 
         OrderItem::insert($cartItems->map(function ($item, $key) use ($userId, $order) {
@@ -92,6 +93,13 @@ class OrderController extends Controller
                 'price' => $item->product->price
             ];
         })->toArray());
+
+        $midtrans = new CreateSnapTokenService(Order::with(['customer', 'orderItems.product'])->find($order->id));
+        $resp = $midtrans->getSnapToken();
+
+        $order->snap_token = $resp->token;
+        $order->payment_url = $resp->redirect_url;
+        $order->save();
 
         return redirect()->route('order.my-order');
     }

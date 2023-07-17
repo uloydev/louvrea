@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Services\Midtrans\CallbackService;
 
@@ -18,6 +19,7 @@ class PaymentCallbackController extends Controller
 
             if ($callback->isSuccess()) {
                 Order::where('id', $order->id)->update([
+                    'status' => OrderStatus::PROCESSING,
                     'payment_status' => 2,
                 ]);
             }
