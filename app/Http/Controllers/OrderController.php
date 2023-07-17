@@ -17,7 +17,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.order', [
+            'orders' => Order::with(['orderItems.product', 'customer'])->get(),
+            'orderStatus' => [
+                OrderStatus::PENDING,
+                OrderStatus::PROCESSING,
+                OrderStatus::SHIPPING,
+                OrderStatus::FINISHED
+            ],
+        ]);
     }
 
     /**
@@ -45,8 +53,6 @@ class OrderController extends Controller
             'fullAddress' => 'required',
             'shippingMethod' => 'required',
         ]);
-
-        dump($request->all());
 
         $userId = Auth::id();
         $cartItems = Cart::where('user_id', $userId)->with('product')->get();
@@ -111,7 +117,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        $order->awb_number = $request->awb_number;
+
+        $order->status = $request->status;
+        $order->save();
+        return redirect()->route('dashboard.order');
     }
 
     /**

@@ -61,6 +61,7 @@ Route::middleware(['role:admin|superadmin'])->prefix('dashboard')->name('dashboa
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/reseller', [ResellerController::class, 'index'])->name('reseller');
+    Route::get('/order', [OrderController::class, 'index'])->name('order');
 });
 
 // superadmin only routes
@@ -92,6 +93,10 @@ Route::middleware(['role:superadmin'])->prefix('dashboard')->name('dashboard.')-
         Route::post('/', 'store')->name('create');
         Route::put('/{reseller}', 'update')->name('update');
         Route::delete('/{reseller}', 'destroy')->name('delete');
+    });
+
+    Route::controller(OrderController::class)->name('order.')->prefix('order')->group(function () {
+        Route::put('/{order}', 'update')->name('update');
     });
 });
 

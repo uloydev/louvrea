@@ -28,9 +28,9 @@
                                 <div class="container">
                                     <div class="my-4">
                                         <h4>Order ID: {{ $order->id }}</h4>
-                                        @empty(!$order->awb_number)
+                                        @if($order->awb_number)
                                             <h4>Nomor Resi: {{ $order->awb_number }}</h4>
-                                        @endisset
+                                        @endif
                                         <p>Order Date: {{ $order->created_at->format('d F Y H:i:s') }}</p>
                                         <p>Shipping Method: {{ $order->shipping_method }}</p>
                                     </div>
