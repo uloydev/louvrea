@@ -31,7 +31,7 @@ Route::get('/', function () {
     ]);
 })->name('index');
 Route::view('/about-us', 'about-us')->name('about-us');
-Route::view('/reseller-info', 'reseller-info')->name('reseller-info');
+Route::get('/reseller-info', [ResellerController::class, 'info'])->name('reseller-info');
 Route::view('/how-to-order', 'how-to-order')->name('how-to-order');
 Route::view('/disclaimer', 'disclaimer')->name('disclaimer');
 Route::get('/product', [ProductController::class, 'index'])->name('product-list');

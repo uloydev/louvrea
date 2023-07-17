@@ -15,6 +15,14 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        if ($request->search) {
+            return view('product-list', [
+                'products' => Product::where('name', 'like', '%'.$request->search.'%')->get(),
+                'search' => $request->search,
+                'cat' => null,
+            ]);
+        }
+
         if ($request->has('cat') and $request->cat != 'all') {
             $cat = ProductCategory::find($request->cat);
             if (!$cat) {
@@ -26,7 +34,7 @@ class ProductController extends Controller
             $products = Product::all();
         }
 
-        return view('product-list', ['products' => $products, 'cat' => $cat]);
+        return view('product-list', ['products' => $products, 'cat' => $cat, 'search' => null]);
     }
 
     public function adminIndex()

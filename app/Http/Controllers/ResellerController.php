@@ -17,6 +17,13 @@ class ResellerController extends Controller
         return view('admin.reseller', ['resellers' => Reseller::all()]);
     }
 
+    public function info()
+    {
+        return view('reseller-info', [
+            'resellers' => Reseller::all(),
+        ]);
+    }
+
 
     /**
      * Store a newly created resource in storage.

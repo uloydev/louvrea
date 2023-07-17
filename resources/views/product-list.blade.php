@@ -9,7 +9,13 @@
                 <div class="col-lg-3">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5 class="card-title">Filter Product</h5>
+                            <h5 class="card-title">
+                                @if ($search)
+                                    Search Result : {{ $search }}
+                                @else
+                                    Filter Product
+                                @endif
+                            </h5>
                         </div>
                         <div class="card-body">
                             <div class="form-group mb-3">

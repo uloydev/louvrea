@@ -28,9 +28,9 @@
                 </li>
 
             </ul>
-            <form class="form-inline search-form" action="search.php" method="GET">
+            <form class="form-inline search-form" action="{{route('product-list')}}" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                    name="query">
+                    name="search">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
             </form>
             <ul class="navbar-nav">
