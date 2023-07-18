@@ -52,6 +52,8 @@ Route::middleware(['role:user'])->group(function () {
         Route::post('/','store')->name('create');
         Route::get('/','myOrder')->name('my-order');
     });
+
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 });
 
 // admin or superadmin routes

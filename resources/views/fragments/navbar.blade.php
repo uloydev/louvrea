@@ -28,7 +28,7 @@
                 </li>
 
             </ul>
-            <form class="form-inline search-form" action="{{route('product-list')}}" method="GET">
+            <form class="form-inline search-form" action="{{ route('product-list') }}" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
                     name="search">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
@@ -41,10 +41,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile') }}">
+                            <i class="icofont-user"style="font-size: 2em;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" id="logout-form">
                             @csrf
                         </form>
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
                         </a>
                     </li>

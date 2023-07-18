@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class userController extends Controller
 {
@@ -14,6 +15,11 @@ class userController extends Controller
     public function index()
     {
         return view('admin.user', ['users' => User::where('role', 'user')->get()]);
+    }
+
+    public function profile()
+    {
+        return view('profile', ['user' => Auth::user()]);
     }
 
     /**
