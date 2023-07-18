@@ -31,11 +31,11 @@
                 <div class="col-md-3">
                     <h4 class="mb-4">Follow Us</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light"><i class="icofont-instagram"></i></a></li>
-                        <li><a href="#" class="text-light"><i class="icofont-whatsapp"></i></a></li>
-                        <li><a href="#" class="text-light">Shopee</a></li>
-                        <li><a href="#" class="text-light">Tokopedia</a></li>
-                        <li><a href="#" class="text-light">Bukalapak</a></li>
+                        <li><a href="https://www.instagram.com/louvrea_jabodetabek/" class="text-light"><i class="icofont-instagram"></i></a></li>
+                        <li><a href="https://api.whatsapp.com/send/?phone=%2B6281282204770&text&type=phone_number&app_absent=0" class="text-light"><i class="icofont-whatsapp"></i></a></li>
+                        <li><a href="https://linkr.it/4nxFny" class="text-light">Shopee</a></li>
+                        <li><a href="https://linkr.it/3caVdm" class="text-light">Tokopedia</a></li>
+                        <li><a href="https://linkr.it/4ku5Yh" class="text-light">Bukalapak</a></li>
                     </ul>
                 </div>
             </div>
