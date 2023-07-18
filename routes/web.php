@@ -51,6 +51,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::controller(OrderController::class)->name('order.')->prefix('order')->group(function () {
         Route::post('/','store')->name('create');
         Route::get('/','myOrder')->name('my-order');
+        Route::delete('/{order}','destroy')->name('my-order.delete');
     });
 
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');

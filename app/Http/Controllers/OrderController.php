@@ -9,6 +9,7 @@ use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Midtrans\CreateSnapTokenService;
+use Illuminate\Validation\UnauthorizedException;
 
 class OrderController extends Controller
 {
@@ -143,6 +144,13 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        if (Auth::id() != $order->user_id or $order->status != OrderStatus::PENDING) {
+            throw new UnauthorizedException();
+        }
+
+        OrderItem::where('order_id', $order->id)->delete();
+        $order->delete();
+
+        return redirect()->route('order.my-order');
     }
 }

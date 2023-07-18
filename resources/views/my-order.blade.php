@@ -53,7 +53,7 @@
                                                 <tbody>
                                                     @foreach ($order->orderItems as $item)
                                                         <tr>
-                                                            <td>T-Shirt</td>
+                                                            <td>{{ $item->product->name }}</td>
                                                             <td>{{ 'Rp ' . number_format($item->price, 0, ',', '.') }}</td>
                                                             <td>{{ $item->quantity }}</td>
                                                             <td>{{ 'Rp ' . number_format($item->price * $item->quantity, 0, ',', '.') }}
@@ -106,8 +106,17 @@
                                     </div>
                                 </div>
                                 @if ($order->status == 'PENDING' and $order->payment_status != '2')
-                                    <button class="btn btn-warning btn-block" onclick="pay('{{ $order->payment_url }}')">Bayar
+                                    <button class="btn btn-warning btn-block"
+                                        onclick="pay('{{ $order->payment_url }}')">Bayar
                                         Sekarang</button>
+                                @endif
+                                @if ($order->status == 'PENDING')
+                                    <form action="{{ route('order.my-order.delete', $order->id) }}" method="post"
+                                        id="deleteForm{{ $order->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <button class="btn btn-danger btn-block mt-2" type="submit" form="deleteForm{{ $order->id }}">Hapus Order</button>
                                 @endif
                             </div>
                         </div>
