@@ -13,10 +13,10 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('img/image1.jpg') }}" alt="Banner 2">
+                    <img src="{{ asset('img/image2.jpg') }}" alt="Banner 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('img/image1.jpg') }}" alt="Banner 3">
+                    <img src="{{ asset('img/image3.jpg') }}" alt="Banner 3">
                 </div>
             </div>
         </div>
