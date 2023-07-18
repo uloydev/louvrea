@@ -101,6 +101,8 @@ class OrderController extends Controller
         $order->payment_url = $resp->redirect_url;
         $order->save();
 
+        Cart::whereIn('id', $cartItems->pluck('id'))->where('user_id', $userId)->delete();
+
         return redirect()->route('order.my-order');
     }
 
