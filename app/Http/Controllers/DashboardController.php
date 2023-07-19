@@ -29,8 +29,10 @@ class DashboardController extends Controller
         ];
         
         for ($i=0; $i < 3; $i++) { 
-            $t = $time->year.'-'.$time->month;
-            $chartData['sales'][] = 'Rp ' . number_format($data->get($labels->search($t), 0), 0, ',', '.');
+            $t = $time->format('Y-m');
+            $value = $labels->search($t);
+            $v = $value != false ? $data->get($value) : 0; 
+            $chartData['sales'][] = 'Rp ' . number_format($v, 0, ',', '.');
             $chartData['labels'][] = $t;
             $time->addMonth(1);
         }
