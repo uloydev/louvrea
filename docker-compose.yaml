@@ -49,7 +49,7 @@ services:
     image: phpmyadmin
     restart: always
     ports:
-      - "3380:80"
+      - 3380:80
     environment:
       PMA_HOST: mariadb
       MYSQL_ROOT_PASSWORD: root
