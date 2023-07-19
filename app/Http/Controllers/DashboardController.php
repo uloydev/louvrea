@@ -21,6 +21,7 @@ class DashboardController extends Controller
         
         
         $labels = $sales->pluck('month');
+        $data = $sales->pluck('SALES');
         
         $chartData = [
             'sales' => [],
@@ -29,11 +30,7 @@ class DashboardController extends Controller
         
         for ($i=0; $i < 3; $i++) { 
             $t = $time->year.'-'.$time->month;
-            if (in_array($t, $labels)) {
-                $chartData['sales'][] = 'Rp ' . number_format($sales->get($labels->search($t)), 0, ',', '.');
-            } else {
-                $chartData['sales'][] = 'Rp ' . number_format(0, 0, ',', '.');
-            }
+            $chartData['sales'][] = 'Rp ' . number_format($data->get($labels->search($t), 0), 0, ',', '.');
             $chartData['labels'][] = $t;
             $time->addMonth(1);
         }
