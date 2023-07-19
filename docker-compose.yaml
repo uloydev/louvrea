@@ -29,20 +29,34 @@ services:
     networks:
       - louvrea
   mariadb:
-        image: mariadb:latest
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: louvrea
-            MYSQL_USER: louvrea
-            MYSQL_PASSWORD: louvrea
-        networks:
-            - louvrea
-        restart: on-failure
-        volumes:
-            - ./db:/docker-entrypoint-initdb.d
-            - databaseVolume:/var/lib/mysql
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: louvrea
+      MYSQL_USER: louvrea
+      MYSQL_PASSWORD: louvrea
+    ports:
+      - 3306:3306
+    networks:
+      - louvrea
+    restart: on-failure
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - databaseVolume:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - mariadb
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "3380:80"
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - louvrea
 volumes:
-    databaseVolume:
+  databaseVolume:
 networks:
   louvrea:
     driver: bridge
