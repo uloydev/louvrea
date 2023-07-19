@@ -11,7 +11,7 @@
                     <div class="card mb-3">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img src="{{ asset($item->product->image) }}" class="card-img"
+                                <img src="{{ asset('storage/',$item->product->image) }}" class="card-img"
                                     alt="{{ $item->product->name }}">
                             </div>
                             <div class="col-md-8">
