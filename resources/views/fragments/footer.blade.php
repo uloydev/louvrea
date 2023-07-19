@@ -22,7 +22,7 @@
                             <li><a href="{{route('about-us')}}" class="text-light">About Louvrea</a></li>
                             <li><a href="{{route('reseller-info')}}" class="text-light">Our Official Reseller</a></li>
                             <li><a href="{{route('how-to-order')}}" class="text-light">Order and Return</a></li>
-                            <li><a href="{{route('disclaimer')}}" class="text-light">Disclaimer</a></li>
+                            {{-- <li><a href="{{route('disclaimer')}}" class="text-light">Disclaimer</a></li> --}}
                         </ul>
 
 

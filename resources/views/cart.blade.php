@@ -29,11 +29,11 @@
                                 @method('POST')
                                 <input type="number" name="value" hidden value="-1">
                             </form>
-                            <button class="btn btn-sm btn-primary bg-dark" type="submit" form="formIncrement">+</button>
+                            <button class="btn btn-sm btn-primary bg-dark" type="submit" form="formDecrement">-</button>
                             <span class="mx-2">
                                 {{ $item->quantity }}
                             </span>
-                            <button class="btn btn-sm btn-primary bg-dark" type="submit" form="formDecrement">-</button>
+                            <button class="btn btn-sm btn-primary bg-dark" type="submit" form="formIncrement">+</button>
                         </td>
                         <td>{{ 'Rp ' . number_format($item->product->price * $item->quantity, 0, ',', '.') }}</td>
                         <td>
