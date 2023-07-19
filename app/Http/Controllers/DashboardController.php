@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\OrderStatus;
 
 class DashboardController extends Controller
 {
@@ -20,7 +21,7 @@ class DashboardController extends Controller
             'productCount' => Product::count(),
             'orderCount' => Order::count(),
             'customerCount' => User::where('role', 'user')->count(),
-            'income' => Order::where('status', 'success')->select('grand_total')->sum('grand_total'),
+            'income' => Order::where('status', OrderStatus::FINISHED)->select('grand_total')->sum('grand_total'),
             'salesData' => json_encode([
                 'labels' => $sales->pluck('month'),
                 'datasets' => [[
