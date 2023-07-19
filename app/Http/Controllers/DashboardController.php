@@ -13,9 +13,30 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $threeMonthsAgo = Carbon::now()->subMonths(3);
+        $time = Carbon::now()->subMonths(2);
+        $time->day = 1;
 
-        $sales = Order::where('created_at', '>=', $threeMonthsAgo)->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, SUM(grand_total) as SALES')->groupBy('month')->orderBy('month')->get();
+        
+        $sales = Order::where('created_at', '>=', $time)->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, SUM(grand_total) as SALES')->groupBy('month')->orderBy('month')->get();
+        
+        
+        $labels = $sales->pluck('month');
+        
+        $chartData = [
+            'sales' => [],
+            'labels' => []
+        ];
+        
+        for ($i=0; $i < 3; $i++) { 
+            $t = $time->year.'-'.$time->month;
+            if (in_array($t, $labels)) {
+                $chartData['sales'][] = 'Rp ' . number_format($sales->get($labels->search($t)), 0, ',', '.');
+            } else {
+                $chartData['sales'][] = 'Rp ' . number_format(0, 0, ',', '.');
+            }
+            $chartData['labels'][] = $t;
+            $time->addMonth(1);
+        }
 
         return view('admin.dashboard', [
             'productCount' => Product::count(),
@@ -23,12 +44,10 @@ class DashboardController extends Controller
             'customerCount' => User::where('role', 'user')->count(),
             'income' => Order::where('status', OrderStatus::FINISHED)->select('grand_total')->sum('grand_total'),
             'salesData' => json_encode([
-                'labels' => $sales->pluck('month'),
+                'labels' => $chartData['labels'],
                 'datasets' => [[
                     'label' => 'Sales',
-                    'data' => $sales->pluck('sales')->map(function($item) {
-                        return 'Rp ' . number_format($item, 0, ',', '.');
-                    }),
+                    'data' => $chartData['sales'],
                     'backgroundColor' => 'rgba(0, 123, 255, 0.5)',
                     'borderColor' => 'rgba(0, 123, 255, 1)',
                     'borderWidth' => 2,

@@ -43,7 +43,7 @@
                             <h3 class="card-title">Total Income</h3>
                         </div>
                         <div class="card-body">
-                            <h4>{{ $income }}</h4>
+                            <h4>{{ 'Rp ' . number_format($income, 0, ',', '.') }}</h4>
                         </div>
                     </div>
                 </div>
