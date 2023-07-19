@@ -1,6 +1,8 @@
 @extends('layouts.custom')
 
 @section('content')
+
+
     <section id="home">
         <!-- Home section content -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
