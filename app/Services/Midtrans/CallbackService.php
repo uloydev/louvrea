@@ -58,7 +58,7 @@ class CallbackService extends Midtrans
     {
         $orderId = $this->notification->order_id;
         $statusCode = $this->notification->status_code;
-        $grossAmount = $this->order->grand_total;
+        $grossAmount = number_format($this->order->grand_total, 2, '.', '');
         $serverKey = $this->serverKey;
         $input = $orderId . $statusCode . $grossAmount . $serverKey;
         $signature = openssl_digest($input, 'sha512');
