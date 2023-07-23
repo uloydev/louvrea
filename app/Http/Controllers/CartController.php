@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Regency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -111,6 +112,7 @@ class CartController extends Controller
             'shipping_methods' => [
                 'KURIR TOKO'
             ],
+            'jabodetabek' => Regency::whereIn('id', Regency::jabodetabek)->get(),
             'shipping' => $shippingPrice,
             'items' => $cartItems,
             'subTotal' => $subTotal,

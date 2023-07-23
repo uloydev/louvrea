@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
+use App\Models\Regency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Midtrans\CreateSnapTokenService;
@@ -48,11 +50,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'fullName' => 'required',
             'phoneNumber' => 'required',
             'fullAddress' => 'required',
             'shippingMethod' => 'required',
+            'city' => 'required',
+            'district' => 'required',
         ]);
 
         $userId = Auth::id();
@@ -60,7 +65,14 @@ class OrderController extends Controller
 
         // dd($cartItems);
         if (count($cartItems) == 0) {
-            return redirect()->route('cart.index');
+            return redirect()->route('cart.index')->withErrors("Can't checkout, your cart is Empty!");
+        }
+
+        $city = Regency::find($request->city);
+        $district = District::find($request->district);
+
+        if (!$city or !$district or !in_array($city->id, Regency::jabodetabek)) {
+            return redirect()->route('cart.index')->withErrors("Invalid city or district!");
         }
 
         $subTotal = 0;
@@ -77,7 +89,8 @@ class OrderController extends Controller
             'order_price' => $subTotal,
             'shipping_price' => $shippingPrice,
             'address' => $request->fullAddress,
-            'address_detail' => $request->addressDetail,
+            'city' => $city->name,
+            'district' => $district->name,
             'phone' => $request->phoneNumber,
             'shipping_method' => $request->shippingMethod,
             'status' => OrderStatus::PENDING,

@@ -25,7 +25,9 @@ class Order extends Model
         'status',
         'payment_status',
         'snap_token',
-        'payment_url'
+        'payment_url',
+        'city',
+        'district',
     ];
 
     public function orderItems() 

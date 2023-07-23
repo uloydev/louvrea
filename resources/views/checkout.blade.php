@@ -64,17 +64,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="fullAddress">Alamat Lengkap:</label>
-                        <input type="text" class="form-control" id="fullAddress" name="fullAddress"
-                            placeholder="Masukkan alamat lengkap" required>
-                        @foreach ($errors->get('fullAddress') as $item)
-                            <p>{{ $item }}</p>
-                        @endforeach
+                        <label for="city">Pilih Kota:</label>
+                        <select class="form-control" id="city" name="city">
+                            @foreach ($jabodetabek as $city)
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="addressDetail">Detail Lainnya:</label>
-                        <textarea class="form-control" id="addressDetail" name="addressDetail" placeholder="Masukkan detail lainnya"></textarea>
+                        <label for="district">Pilih Kecamatan:</label>
+                        <select class="form-control" id="district" name="district">
+                            
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullAddress">Alamat Lengkap:</label>
+                        <textarea class="form-control" id="fullAddress" name="fullAddress" placeholder="Masukkan alamat lengkap" required></textarea>
+                        @foreach ($errors->get('fullAddress') as $item)
+                            <p>{{ $item }}</p>
+                        @endforeach
                     </div>
 
                     <h4>Layanan Pengiriman</h4>
@@ -130,3 +140,27 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            $('#city').val('');
+            $('#city').on('change', function () {
+                var select = $('#district');
+
+                $.getJSON('/region/district/'+ $(this).val(), function (data) {
+                    select.remove('option');
+                    data.forEach(function (item) {
+                        var option = $('<option>', {
+                            value: item.id,
+                            text: item.name
+                        });
+                        select.append(option);
+                    });
+                    select.val("");
+                    console.log('district data updated!');
+                });
+            });
+        });
+    </script>
+@endpush

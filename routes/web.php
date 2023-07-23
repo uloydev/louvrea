@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentCallbackController;
+use App\Http\Controllers\RegionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -152,6 +153,14 @@ Route::middleware(['role:superadmin'])->prefix('dashboard')->name('dashboard.')-
 
 // midtrans callback payemnt notification route
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
+
+// region api routes
+Route::controller(RegionController::class)->name('region.')->prefix('region')->group(function () {
+    Route::get('province', 'provinces')->name('province');
+    Route::get('regency/jabodetabek', 'jabodetabekRegency')->name('jabodetabekRegency');
+    Route::get('regency/{id}', 'regencyByProvince')->name('regencyByProvince');
+    Route::get('district/{id}', 'districtByRegency')->name('districtByRegency');
+});
 
 // auth routes
 require __DIR__.'/auth.php';
