@@ -149,7 +149,7 @@
                 var select = $('#district');
 
                 $.getJSON('/region/district/'+ $(this).val(), function (data) {
-                    select.remove('option');
+                    $('#district option').remove();
                     data.forEach(function (item) {
                         var option = $('<option>', {
                             value: item.id,
