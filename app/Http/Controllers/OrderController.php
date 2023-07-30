@@ -7,6 +7,7 @@ use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
+use App\Models\Product;
 use App\Models\Regency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,6 +108,8 @@ class OrderController extends Controller
                 'price' => $item->product->price
             ];
         })->toArray());
+
+        Product::whereIn('id', $cartItems->pluck('product_id'))->decrement('stock', 1);
 
         $midtrans = new CreateSnapTokenService(Order::with(['customer', 'orderItems.product'])->find($order->id));
         $resp = $midtrans->getSnapToken();

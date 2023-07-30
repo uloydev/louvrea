@@ -26,6 +26,8 @@
 <body>
     @include('fragments.navbar')
 
+    @include('fragments.validation-error')
+
     @yield('content')
 
     <section id="About Us">

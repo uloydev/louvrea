@@ -44,12 +44,16 @@
                                 <h4>{{ $prod->name }}</h4>
                                 <p class="product-description text-center">{{ $prod->size }}</p>
                                 <p class="price">{{ 'Rp ' . number_format($prod->price, 0, ',', '.') }}</p>
-                                <form action="{{ route('cart.add') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{$prod->id}}">
-                                    <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class ="btn-buy-now">Add to Cart</button>
-                                </form>
+                                @if ($prod->stock > 0)
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{$prod->id}}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" class ="btn-buy-now">Add to Cart</button>
+                                    </form>
+                                @else
+                                    <button class="btn btn-secondary" disabled>Stok Habis</button>
+                                @endif
                             </div>
                         @endforeach
                     </div>

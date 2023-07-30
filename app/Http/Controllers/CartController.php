@@ -77,10 +77,15 @@ class CartController extends Controller
         $request->validate([
             'value' => 'required|numeric'
         ]);
+        $cart->load('product');
         $value = $request->value;
         if ($cart->quantity == 1 and $value == -1) {
             $cart->delete();
-        } else {
+        } else if ($cart->quantity == $cart->product->stock and $value == 1) {
+            return redirect()
+            ->route('cart.index')
+            ->withErrors('tidak bisa menambah quantity karena stok product tidak mencukupi');
+        }else{
             $cart->quantity += $value;
             $cart->save();
         }

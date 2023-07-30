@@ -1,8 +1,6 @@
 @extends('layouts.custom')
 
 @section('content')
-
-
     <section id="home">
         <!-- Home section content -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -41,23 +39,27 @@
             </div>
         </div>
         <div class="row">
-            @foreach($products as $prod)
+            @foreach ($products as $prod)
                 <div class="col-md-4">
                     <div class="best-seller-card text-center">
-                        <a href="{{route('product.detail', $prod->id)}}">
-                            <img src="{{asset('storage/'.$prod->image)}}" alt="{{ $prod->name }}" class="img-fluid">
+                        <a href="{{ route('product.detail', $prod->id) }}">
+                            <img src="{{ asset('storage/' . $prod->image) }}" alt="{{ $prod->name }}" class="img-fluid">
                         </a>
                         <div class="product-details">
                             <h4 class="product-title text-center">{{ $prod->name }}</h4>
                             <p class="product-description text-center">{{ $prod->size }}
                             </p>
                         </div>
-                        <form action="{{ route('cart.add') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{$prod->id}}">
-                            <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class ="btn-buy-now">Add to Cart</button>
-                        </form>
+                        @if ($prod->stock > 0)
+                            <form action="{{ route('cart.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $prod->id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn-buy-now">Add to Cart</button>
+                            </form>
+                        @else
+                            <button class="btn btn-secondary" disabled>Stok Habis</button>
+                        @endif
                     </div>
                 </div>
             @endforeach
