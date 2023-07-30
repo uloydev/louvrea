@@ -47,7 +47,7 @@ Route::get('/product', [ProductController::class, 'index'])->name('product-list'
 Route::get('/product/{product}', [ProductController::class, 'detail'])->name('product.detail');
 
 // user routes
-Route::middleware(['role:user'])->group(function () {
+Route::middleware(['role:user','verified'])->group(function () {
     // cart related routes
     Route::controller(CartController::class)->name('cart.')->prefix('cart')->group(function () {
         // add to cart
