@@ -17,13 +17,6 @@ class ProductCategoryController extends Controller
         return view('admin.product-category', ['categories' => ProductCategory::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,22 +30,6 @@ class ProductCategoryController extends Controller
         ProductCategory::create(['name' => $request->name]);
 
         return redirect()->route($this->indexRoute);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProductCategory $productCategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProductCategory $productCategory)
-    {
-        //
     }
 
     /**

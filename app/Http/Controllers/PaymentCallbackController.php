@@ -9,6 +9,7 @@ use App\Services\Midtrans\CallbackService;
 
 class PaymentCallbackController extends Controller
 {
+// handle notifikasi pembayaran dari midtrans
     public function receive()
     {
         $callback = new CallbackService;
