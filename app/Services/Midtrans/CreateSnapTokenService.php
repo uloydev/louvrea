@@ -18,19 +18,20 @@ class CreateSnapTokenService extends Midtrans
 
     public function getSnapToken()
     {
+        $items = $this->order->orderItems->map(function ($item) {
+            return [
+                'id' => $item->product_id,
+                'price' => $item->price,
+                'quantity' => $item->quantity,
+                'name' => $item->product->name
+            ];
+        })->toArray();
         $params = [
             'transaction_details' => [
                 'order_id' => $this->order->id.'-'.now()->format('d-F-Y-H-i-s'),
                 'gross_amount' => $this->order->grand_total,
             ],
-            'item_details' => array_push($this->order->orderItems->map(function ($item) {
-                return [
-                    'id' => $item->product_id,
-                    'price' => $item->price,
-                    'quantity' => $item->quantity,
-                    'name' => $item->product->name
-                ];
-            })->toArray(), [
+            'item_details' => array_push($items, [
                 'id' => 999999,
                 'price' => $this->order->shipping_price,
                 'quantity' => 1,
