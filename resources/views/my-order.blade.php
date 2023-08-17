@@ -103,7 +103,41 @@
                                                 @endif
                                             </h4>
                                         </div>
-                                    </div>
+                                          <!-- Move rating and comments section here -->
+                <div class="my-4">
+                    <h4>Penilaian dan Komentar</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Penilaian</th>
+                                <th>Komentar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($order->orderItems as $item)
+                            <tr>
+                            <td>{{ $item->product->name }}</td>
+                            <td>
+                            <div class="star-rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <input type="radio" id="star{{ $i }}_{{ $item->product->id }}" name="rating{{ $item->product->id }}" value="{{ $i }}" onchange="rateProduct({{ $item->product->id }}, this.value)">
+                                <label for="star{{ $i }}_{{ $item->product->id }}" title="{{ $i }} Bintang">
+                                    <span class="fa fa-star"></span>
+                                        </label>
+                                    @endfor
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Masukkan komentar"
+                                    onblur="commentProduct({{ $item->product->id }}, this.value)">
+                            </td>
+                        </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                </div>
                                 </div>
                                 @if ($order->status == 'PENDING' and $order->payment_status != '2')
                                     <button class="btn btn-warning btn-block"

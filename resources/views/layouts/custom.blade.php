@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha384-XX4+o1gjy2A/TTgEF1kLQzft5TNjK8x8qO9yM1h3+5m1sVxu3Aop7sTj3hF9J+Pz" crossorigin="anonymous">
     <link href="{{ asset("vendor/owl.carousel/assets/owl.carousel.min.css") }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-XX4+o1gjy2A/TTgEF1kLQzft5TNjK8x8qO9yM1h3+5m1sVxu3Aop7sTj3hF9J+Pz" crossorigin="anonymous">
     @stack('css')
 
 </head>
@@ -26,15 +28,13 @@
 <body>
     @include('fragments.navbar')
 
-    @include('fragments.validation-error')
-
     @yield('content')
 
     <section id="About Us">
         @include('fragments.footer')
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
