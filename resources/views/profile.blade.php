@@ -8,23 +8,27 @@
                 <!-- User information -->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">User Information</h5>
-                        <form>
+                        <form method="POST" action="{{route('profile.update')}}" enctype="multipart/form-data">
+                            @method('PUT')
+                            @csrf
+                            <img src="{{ isset($user->avatar) ? asset('storage/'.$user->avatar) : asset('img/profile-default.svg') }}" class="rounded-circle mx-auto d-block my-4" alt="profile image" style="width: 10em;">
+                            <div class="form-group">
+                                <label for="avatar">Profile Picture</label>
+                                <input type="file" class="form-control-file" id="avatar" name="avatar">
+                            </div>
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Masukkan nama anda" value="{{$user->name}}">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama anda" value="{{$user->name}}">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Nomor Telepon</label>
                                 <input type="text" class="form-control" id="phone"
-                                    placeholder="Masukkan nomor telepon anda" value="{{$user->phone}}">
+                                    placeholder="Masukkan nomor telepon anda" name="phone" value="{{$user->phone}}">
                             </div>
                             <div class="form-group">
                                 <label for="address">Alamat</label>
                                 <textarea class="form-control" id="alamat"
-                                    placeholder="Masukkan Alamat anda" >
-                                    {{$user->address}}
-                                </textarea>
+                                    placeholder="Masukkan Alamat anda" name="address">{{$user->address}}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary bg-warning">Save</button>
                         </form>

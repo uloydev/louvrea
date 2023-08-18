@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class userController extends Controller
+class UserController extends Controller
 {
     private $indexRoute = 'dashboard.user';
     /**
@@ -25,17 +25,27 @@ class userController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
         $this->validateRequest($request);
+        $path = null;
+        $user = User::where('id', auth()->id())->first();
 
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            if (in_array($file->getExtension(), ['png', 'jpg', 'jpeg', 'gif', 'webp'])) {
+                return redirect()->back();
+            }
+            $path = $file->store('product-image', 'public');
+        }
+        
         $user->update([
+            'avatar' => $path,
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
+            'phone' => $request->phone,
+            'address' => $request->address,
         ]);
-
-        return redirect()->route($this->indexRoute);
+        return redirect()->route('profile');
     }
 
     /**
@@ -51,8 +61,8 @@ class userController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'phone' => 'required',
+            'address' => 'required',
         ]);
     }
 }

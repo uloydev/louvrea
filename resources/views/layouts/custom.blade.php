@@ -10,23 +10,40 @@
         @show
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset("css/style.css") }}">
-    <link href="{{ asset("vendor/animate.css/animate.min.css") }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="{{ asset('vendor/animate.css/animate.min.css') }}" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
         rel="stylesheet">
-    <link href="{{ asset("vendor/icofont/icofont.min.css") }}" rel="stylesheet">
+    <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha384-XX4+o1gjy2A/TTgEF1kLQzft5TNjK8x8qO9yM1h3+5m1sVxu3Aop7sTj3hF9J+Pz" crossorigin="anonymous">
-    <link href="{{ asset("vendor/owl.carousel/assets/owl.carousel.min.css") }}" rel="stylesheet">
+    <link href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-XX4+o1gjy2A/TTgEF1kLQzft5TNjK8x8qO9yM1h3+5m1sVxu3Aop7sTj3hF9J+Pz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-XX4+o1gjy2A/TTgEF1kLQzft5TNjK8x8qO9yM1h3+5m1sVxu3Aop7sTj3hF9J+Pz" crossorigin="anonymous">
     @stack('css')
 
 </head>
 
 <body>
     @include('fragments.navbar')
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger alert-dismissible fade show mx-3" role="alert">
+            <strong>Validation Error</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
     @yield('content')
 
@@ -51,23 +68,30 @@
     @stack('script')
 
     <script>
-window.addEventListener('mouseover', initLandbot, { once: true });
-window.addEventListener('touchstart', initLandbot, { once: true });
-var myLandbot;
-function initLandbot() {
-  if (!myLandbot) {
-    var s = document.createElement('script');s.type = 'text/javascript';s.async = true;
-    s.addEventListener('load', function() {
-      myLandbot = new Landbot.Popup({
-        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1666353-NBKNB078UTLHKQXB/index.json',
-      });
-    });
-    s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
-    var x = document.getElementsByTagName('script')[0];
-    x.parentNode.insertBefore(s, x);
-  }
-}
-</script>
+        window.addEventListener('mouseover', initLandbot, {
+            once: true
+        });
+        window.addEventListener('touchstart', initLandbot, {
+            once: true
+        });
+        var myLandbot;
+
+        function initLandbot() {
+            if (!myLandbot) {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.addEventListener('load', function() {
+                    myLandbot = new Landbot.Popup({
+                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1666353-NBKNB078UTLHKQXB/index.json',
+                    });
+                });
+                s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
+        }
+    </script>
 </body>
 
 </html>

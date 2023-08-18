@@ -74,6 +74,7 @@ Route::middleware(['role:user','verified'])->group(function () {
 
     // user profile page
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
 });
 
 // admin or superadmin routes
