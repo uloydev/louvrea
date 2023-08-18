@@ -36,8 +36,9 @@
             <ul class="navbar-nav">
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cart.index') }}">
+                        <a class="nav-link pr-4" href="{{ route('cart.index') }}">
                             <i class="icofont-cart"style="font-size: 2em;"></i>
+                            <span class="badge badge-pill badge-danger position-absolute">{{App\Models\Cart::where('user_id', auth()->id())->count()}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
