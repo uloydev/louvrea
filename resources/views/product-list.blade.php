@@ -24,7 +24,7 @@
                                     <select id="category" class="form-control" name="cat">
                                         <option value="all">Semua</option>
                                         @foreach (App\Models\ProductCategory::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" @selected(isset($cat) && $cat->id == $item->id)>{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </form>
