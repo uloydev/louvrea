@@ -86,7 +86,7 @@ class ProductController extends Controller
 
     public function detail(Product $product)
     {
-        return view('product-detail', ['product' => $product]);
+        return view('product-detail', ['product' => $product->load('ratings')]);
     }
 
     /**

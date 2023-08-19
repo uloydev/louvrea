@@ -30,7 +30,7 @@ use App\Models\ProductCategory;
 // landing page
 Route::get('/', function () {
     return view('index', [
-        'products' => Product::inRandomOrder()->take(6)->get(),
+        'products' => Product::with('ratings')->inRandomOrder()->take(6)->get(),
     ]);
 })->name('index');
 // about us page

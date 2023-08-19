@@ -45,9 +45,9 @@
                                 <p class="product-description text-center">{{ $prod->size }}</p>
                                 <p class="price">{{ 'Rp ' . number_format($prod->price, 0, ',', '.') }}</p>
                                 <p class="text-warning">
-                                    @if ($prod->rating)
+                                    @if (count($prod->ratings))
                                         <i class="icofont-star"></i>
-                                        {{$prod->rating->avg}}
+                                        {{$prod->ratings->avg('rating')}}
                                     @else
                                         Belum Ada Rating
                                     @endif

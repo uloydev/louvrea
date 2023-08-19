@@ -14,9 +14,9 @@
                 <p>Size:</p>
                 <p>{{ $product->size }}</p>
                 <p class="text-warning">
-                    @if ($product->rating)
+                    @if (count($product->ratings))
                         <i class="icofont-star"></i>
-                        {{$product->rating->avg}}
+                        {{$product->ratings->avg('rating')}}
                     @else
                         Belum Ada Rating
                     @endif
