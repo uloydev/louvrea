@@ -43,7 +43,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('profile') }}">
-                            <i class="icofont-user"style="font-size: 2em;"></i>
+                            <img src="{{ isset(auth()->user()->avatar) ? asset('storage/'.auth()->user()->avatar) : asset('img/profile-default.svg') }}" class="rounded-circle mx-auto d-block" alt="profile image" style="width: 2em;">
                         </a>
                     </li>
                     <li class="nav-item">
