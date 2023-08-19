@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
 use App\Models\Product;
+use App\Models\ProductRating;
 use App\Models\Regency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class OrderController extends Controller
 
     public function myOrder()
     {
-        $orders = Order::where('user_id', Auth::id())->with('orderItems')->get();
+        $orders = Order::where('user_id', Auth::id())->with(['orderItems', 'ratings'])->get();
         return view('my-order', ['orders' => $orders]);
     }
 
@@ -123,20 +124,21 @@ class OrderController extends Controller
         return redirect()->route('order.my-order');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
+    public function submitRating(Request $request, OrderItem $item)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
+        $request->validate([
+            'rating' => 'required|numeric|min:1|max:5'
+        ]);
+        $userId = auth()->id();
+        abort_if($userId != $item->user_id, 401, 'Unauthorized');
+        ProductRating::create([
+            'user_id' => $userId,
+            'order_id' => $item->order_id,
+            'product_id' => $item->product_id,
+            'rating' => $request->rating,
+            'review' => $request->review,
+        ]);
+        return redirect()->route('order.my-order');
     }
 
     /**

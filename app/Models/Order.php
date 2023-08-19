@@ -27,8 +27,7 @@ class Order extends Model
         'snap_token',
         'payment_url',
         'city',
-        'district',
-        'has_rating'
+        'district'
     ];
 
     public function orderItems() 
@@ -39,6 +38,11 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(ProductRating::class);
     }
 }
 

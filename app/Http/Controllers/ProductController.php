@@ -15,9 +15,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $products = Product::with('ratings');
         if ($request->search) {
             return view('product-list', [
-                'products' => Product::where('name', 'like', '%'.$request->search.'%')->get(),
+                'products' => $products->where('name', 'like', '%'.$request->search.'%')->get(),
                 'search' => $request->search,
                 'cat' => null,
             ]);
@@ -28,10 +29,10 @@ class ProductController extends Controller
             if (!$cat) {
                 abort(404);
             }
-            $products = Product::where('product_category_id', $request->cat)->get();
+            $products = $products->where('product_category_id', $request->cat)->get();
         } else {
             $cat = null;
-            $products = Product::all();
+            $products = $products->get();
         }
 
         return view('product-list', ['products' => $products, 'cat' => $cat, 'search' => null]);

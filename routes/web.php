@@ -70,6 +70,7 @@ Route::middleware(['role:user','verified'])->group(function () {
         Route::get('/','myOrder')->name('my-order');
         // cancel / delete order
         Route::delete('/{order}','destroy')->name('my-order.delete');
+        Route::post('/myOrder/rating/{item}','submitRating')->name('my-order.rating');
     });
 
     // user profile page

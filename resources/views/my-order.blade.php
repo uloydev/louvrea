@@ -8,12 +8,75 @@
             @foreach ($orders as $order)
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-8">Order #{{ $order->id }}</div>
-                        <div class="col-md-4"><button class="btn btn-block btn-warning" data-toggle="modal"
-                                data-target="#detailModal{{ $order->id }}">Detail</button></div>
+                        <div class="col-md-8">
+                            Order #{{ $order->id }}
+                            <p>Status: {{ $order->status }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-block btn-warning" data-toggle="modal"
+                                data-target="#detailModal{{ $order->id }}">Detail</button>
+                            @if ($order->status == 'FINISHED' and count($order->orderItems) > count($order->ratings))
+                                <button class="btn btn-block btn-primary" data-toggle="modal"
+                                    data-target="#ratingModal{{ $order->id }}">Buat Review</button>
+                            @endif
+                        </div>
                     </div>
-                    <p>Status: {{ $order->status }}</p>
                 </li>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ratingModal{{ $order->id }}" tabindex="-1" role="dialog"aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Order Rating & Review</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @foreach ($order->ratings as $rat)
+                                    <div class="p-2 border border-warning border-lg mx-2 my-4">
+                                        <h5>{{ $rat->product->name }}</h5>
+                                        <p class="text-warning"><i class="icofont-star pr-2"></i>{{ $rat->rating }}</p>
+                                        @if ($rat->review)
+                                            <blockquote>
+                                                {{ $rat->review }}
+                                            </blockquote>
+                                        @endif
+                                    </div>
+                                @endforeach
+
+                                @foreach ($order->orderItems->whereNotIn('product_id', $order->ratings->pluck('product_id')) as $item)
+                                    <form class="p-2 border border-warning mx-2 my-4" id="ratingForm{{ $order->id }}" action="{{route('order.my-order.rating', $item->id)}}" method="POST">
+                                        @csrf
+                                        <h5>{{ $item->product->name }}</h5>
+                                        <p>Rating</p>
+                                        <div class="rating">
+                                            <input type="radio" name="rating" id="star5" value="5" required>
+                                            <label for="star5"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star4" value="4" required>
+                                            <label for="star4"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star3" value="3" required>
+                                            <label for="star3"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star2" value="2" required>
+                                            <label for="star2"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star1" value="1" required>
+                                            <label for="star1"><i class="icofont-star"></i></label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="review">Review</label>
+                                            <textarea class="form-control" id="review" name="review" rows="3"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-warning btn-block">Submit Rating</button>
+                                    </form>
+                                @endforeach
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal fade" id="detailModal{{ $order->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="detailModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -103,41 +166,8 @@
                                                 @endif
                                             </h4>
                                         </div>
-                                          <!-- Move rating and comments section here -->
-                <div class="my-4">
-                    <h4>Penilaian dan Komentar</h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Penilaian</th>
-                                <th>Komentar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($order->orderItems as $item)
-                            <tr>
-                            <td>{{ $item->product->name }}</td>
-                            <td>
-                            <div class="star-rating">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <input type="radio" id="star{{ $i }}_{{ $item->product->id }}" name="rating{{ $item->product->id }}" value="{{ $i }}" onchange="rateProduct({{ $item->product->id }}, this.value)">
-                                <label for="star{{ $i }}_{{ $item->product->id }}" title="{{ $i }} Bintang">
-                                    <span class="fa fa-star"></span>
-                                        </label>
-                                    @endfor
-                                </div>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" placeholder="Masukkan komentar"
-                                    onblur="commentProduct({{ $item->product->id }}, this.value)">
-                            </td>
-                        </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                </div>
+                                        <!-- Move rating and comments section here -->
+                                    </div>
                                 </div>
                                 @if ($order->status == 'PENDING' and $order->payment_status != '2')
                                     <button class="btn btn-warning btn-block"
@@ -150,7 +180,8 @@
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                    <button class="btn btn-danger btn-block mt-2" type="submit" form="deleteForm{{ $order->id }}">Hapus Order</button>
+                                    <button class="btn btn-danger btn-block mt-2" type="submit"
+                                        form="deleteForm{{ $order->id }}">Hapus Order</button>
                                 @endif
                             </div>
                         </div>
@@ -160,7 +191,6 @@
             <!-- Tambahkan order lainnya sesuai kebutuhan -->
         </ul>
     </div>
-
     <!-- Modal Pop-up -->
 @endsection
 
@@ -170,4 +200,31 @@
             window.open(payUrl, '_blank');
         };
     </script>
+@endpush
+
+@push('css')
+    <style>
+        .rating {
+            display: inline-block;
+            direction: rtl
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            padding: 0;
+            color: darkgray;
+        }
+
+        .rating input:checked~label,
+        .rating input:checked~label~label {
+            color: #ffc107;
+        }
+    </style>
 @endpush
