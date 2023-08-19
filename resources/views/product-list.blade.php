@@ -29,13 +29,13 @@
                                     </select>
                                 </form>
                             </div>
+                            <div class="text-end mb-3">
+                                <button class="btn btn-primary bg-warning btn-block" type="submit" form="filterForm">Terapkan</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="text-end mb-3">
-                        <button class="btn btn-primary bg-warning" type="submit" form="filterForm">Terapkan</button>
-                    </div>
                     <div class="product-gallery">
                         @foreach ($products as $prod)
                             <div class="product-card">
