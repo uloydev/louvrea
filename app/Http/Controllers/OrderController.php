@@ -127,7 +127,8 @@ class OrderController extends Controller
     public function submitRating(Request $request, OrderItem $item)
     {
         $request->validate([
-            'rating' => 'required|numeric|min:1|max:5'
+            'rating' => 'required|numeric|min:1|max:5',
+            'review' => 'required'
         ]);
         $userId = auth()->id();
         abort_if($userId != $item->user_id, 401, 'Unauthorized');

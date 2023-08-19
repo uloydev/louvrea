@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="review">Review</label>
-                                            <textarea class="form-control" id="review" name="review" rows="3"></textarea>
+                                            <textarea class="form-control" id="review" name="review" rows="3" required></textarea>
                                         </div>
                                         <button type="submit" class="btn btn-warning btn-block">Submit Rating</button>
                                     </form>
