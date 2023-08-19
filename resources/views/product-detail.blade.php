@@ -13,6 +13,14 @@
                 <p>{{ $product->description }}</p>
                 <p>Size:</p>
                 <p>{{ $product->size }}</p>
+                <p class="text-warning">
+                    @if ($product->rating)
+                        <i class="icofont-star"></i>
+                        {{$product->rating->avg}}
+                    @else
+                        Belum Ada Rating
+                    @endif
+                </p>
                 @if ($product->stock > 0)
                     <form action="{{ route('cart.add') }}" method="POST">
                         @csrf

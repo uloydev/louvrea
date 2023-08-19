@@ -44,6 +44,14 @@
                                 <h4>{{ $prod->name }}</h4>
                                 <p class="product-description text-center">{{ $prod->size }}</p>
                                 <p class="price">{{ 'Rp ' . number_format($prod->price, 0, ',', '.') }}</p>
+                                <p class="text-warning">
+                                    @if ($prod->rating)
+                                        <i class="icofont-star"></i>
+                                        {{$prod->rating->avg}}
+                                    @else
+                                        Belum Ada Rating
+                                    @endif
+                                </p>
                                 @if ($prod->stock > 0)
                                     <form action="{{ route('cart.add') }}" method="POST">
                                         @csrf

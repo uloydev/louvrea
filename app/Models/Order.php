@@ -28,6 +28,7 @@ class Order extends Model
         'payment_url',
         'city',
         'district',
+        'has_rating'
     ];
 
     public function orderItems() 

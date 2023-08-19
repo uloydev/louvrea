@@ -49,6 +49,14 @@
                             <h4 class="product-title text-center">{{ $prod->name }}</h4>
                             <p class="product-description text-center">{{ $prod->size }}
                             </p>
+                            <p class="text-warning">
+                                @if ($prod->rating)
+                                    <i class="icofont-star"></i>
+                                    {{$prod->rating->avg}}
+                                @else
+                                    Belum Ada Rating
+                                @endif
+                            </p>
                         </div>
                         @if ($prod->stock > 0)
                             <form action="{{ route('cart.add') }}" method="POST">
