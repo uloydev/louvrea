@@ -52,16 +52,16 @@
                                         <h5>{{ $item->product->name }}</h5>
                                         <p>Rating</p>
                                         <div class="rating">
-                                            <input type="radio" name="rating" id="star5" value="5" required>
-                                            <label for="star5"><i class="icofont-star"></i></label>
-                                            <input type="radio" name="rating" id="star4" value="4" required>
-                                            <label for="star4"><i class="icofont-star"></i></label>
-                                            <input type="radio" name="rating" id="star3" value="3" required>
-                                            <label for="star3"><i class="icofont-star"></i></label>
-                                            <input type="radio" name="rating" id="star2" value="2" required>
-                                            <label for="star2"><i class="icofont-star"></i></label>
-                                            <input type="radio" name="rating" id="star1" value="1" required>
-                                            <label for="star1"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star1-{{$item->id}}" value="1" required>
+                                            <label for="star1-{{$item->id}}"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star2-{{$item->id}}" value="2" required>
+                                            <label for="star2-{{$item->id}}"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star3-{{$item->id}}" value="3" required>
+                                            <label for="star3-{{$item->id}}"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star4-{{$item->id}}" value="4" required>
+                                            <label for="star4-{{$item->id}}"><i class="icofont-star"></i></label>
+                                            <input type="radio" name="rating" id="star5-{{$item->id}}" value="5" required>
+                                            <label for="star5-{{$item->id}}"><i class="icofont-star"></i></label>
                                         </div>
                                         <div class="form-group">
                                             <label for="review">Review</label>
@@ -199,6 +199,15 @@
         const pay = (payUrl) => {
             window.open(payUrl, '_blank');
         };
+
+        $(document).ready(function () {
+            $('input[name="rating"]').on('click', function () {
+                const labels =  $(this).siblings('label');
+                labels.css('color','darkgray');
+                labels.slice(0,$(this).val()).css('color','#ffc107');
+            });
+            console.log($('input[name="rating"]'));
+        });
     </script>
 @endpush
 
@@ -206,7 +215,6 @@
     <style>
         .rating {
             display: inline-block;
-            direction: rtl
         }
 
         .rating input {
@@ -220,11 +228,6 @@
             margin: 0;
             padding: 0;
             color: darkgray;
-        }
-
-        .rating input:checked~label,
-        .rating input:checked~label~label {
-            color: #ffc107;
         }
     </style>
 @endpush
